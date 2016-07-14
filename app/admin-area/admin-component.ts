@@ -17,7 +17,7 @@ export class AdminComponent implements OnInit
     answers: Answer[] =[];
     dates: number[] = [];
     times: string[] = [];
-    months: number[] = [];
+    months: string[] = [];
 
 
 
@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit
             }
 
             var j:number;
-            for( j = 1 ; j<= 24; j++)
+            for( j = 0; j<= 24; j++)
             {
               console.log(j);
               this.times.push(j + ':00');

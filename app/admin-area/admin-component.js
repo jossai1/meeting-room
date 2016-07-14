@@ -34,7 +34,7 @@ var AdminComponent = (function () {
             this.dates.push(i);
         }
         var j;
-        for (j = 1; j <= 24; j++) {
+        for (j = 0; j <= 24; j++) {
             console.log(j);
             this.times.push(j + ':00');
         }
