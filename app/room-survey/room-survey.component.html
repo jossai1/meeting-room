@@ -1,0 +1,9 @@
+<h1>{{title}} </h1>
+<p>
+	Please tap how you feel
+</p>
+<section class='form-wrapper'>
+	<div class='meeting-form' *ngFor="let img of imageArray; let i = index" >
+		<img [src]="img.link" [id]="'answer' + i" (click)="handleClicks(i)"/>
+	</div>
+</section>

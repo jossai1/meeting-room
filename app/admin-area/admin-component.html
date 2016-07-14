@@ -1,0 +1,27 @@
+<h1>{{ myTitle }}</h1> <h2>{{ pick }}</h2>
+
+<form class="date-box" action="">
+  <select name="dates" >
+    <option *ngFor="let day of dates; let i = index" value="day"> {{dates[i]}} </option>
+  </select>
+  <br><br>
+
+  <form class="month-box" action="">
+    <select name="months" >
+      <option *ngFor="let month of months; let i = index" value="month"> {{months[i]}} </option>
+    </select>
+  </form>
+
+  <form class="month-box" action="">
+    <select name="months" >
+      <option *ngFor="let time of times; let i = index" value="time"> {{times[i]}} </option>
+    </select>
+  </form>
+
+</form>
+
+
+<div class= "answers" *ngFor= "let answer of answers">
+  <p> QUESTIONID: {{answer.questionID}}     RESPONSE: {{answer.response}}  </p>
+
+</div>
