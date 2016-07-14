@@ -2,6 +2,10 @@ export class Answer {
   _id: string;
   questionID: string;
   response:string;
-  time: string;
+  time: number;
+  date: string;
   __v: number;
 }
+
+
+//need date field

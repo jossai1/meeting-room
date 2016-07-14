@@ -43,39 +43,64 @@ export class RoomSurveyComponent implements OnInit
     }
 
 
-    getTime()
+    getDate()
     {
        var date  = new Date();
-       var currentTime = date.getDate() +'/'+ (date.getMonth()+1) + '/' + date.getFullYear() + ' - '+ date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds();
+       //var currentTime = date.getDate() +'/'+ (date.getMonth()+1) + '/' + date.getFullYear() + ' - '+ date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds();
+       var currentTime = date.getDate() +'/'+ (date.getMonth()+1) + '/' + date.getFullYear();
        return currentTime;
      }
 
+     procString(hour:string,min:string)
+     {
+       if(hour.toString().length == 1) {
+            hour = '0'+hour;
+           }
+           if(min.toString().length == 1) {
+              min = '0'+min;
+         }
+         return hour + '.' + min;
+     }
 
-     logVote (questionID:string, response:string, time:string) {
+     getTime()
+     {
+        var date  = new Date();
+        //var currentTime = date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds();
+        var currentTime = date.getHours() + '.' + date.getMinutes();
+        //console.log(parseFloat(this.procString( 12,30)));
+        //proc string is for adding an extra 0 to unit numbers like 12:03 will be 12.3 - > pro string turns it to 12:03
+        return parseFloat(this.procString( date.getHours().toString(),date.getMinutes().toString()));
+      }
+
+//need date param
+
+     logVote (questionID:string, response:string, time:number,date:string) {
        if (!response) { return; }
        console.log('done');
-       this.answerService.logVote(questionID,response,time)
+       this.answerService.logVote(questionID,response,time,date)
                         .then((error:any) =>  this.error = <any>error);
  }
+
+
     handleClicks(i:number )
     {
        if(i == 0)
        {
          this.GreenCount++;
          console.log('GreenCount: '+ this.GreenCount + ' - ' +  this.getTime());
-         this.logVote("5784d21e69c702ad3b000002","green", this.getTime());
+         this.logVote("5784d21e69c702ad3b000002","green", this.getTime(),this.getDate());
        }
        else if (i == 1)
        {
          this.AmberCount++;
          console.log('AmberCount: ' +this.AmberCount + ' - ' +  this.getTime());
-         this.logVote("5784d21e69c702ad3b000002","amber", this.getTime());
+         this.logVote("5784d21e69c702ad3b000002","amber", this.getTime(),this.getDate());
        }
        else
        {
          this.RedCount++;
          console.log('Redcount:' + this.RedCount+ ' - ' +  this.getTime());
-         this.logVote("5784d21e69c702ad3b000002","red", this.getTime());
+         this.logVote("5784d21e69c702ad3b000002","red", this.getTime(),this.getDate());
        }
 
  }

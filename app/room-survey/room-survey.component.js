@@ -32,35 +32,54 @@ var RoomSurveyComponent = (function () {
     RoomSurveyComponent.prototype.ngOnInit = function () {
         //this.getQuestions();
     };
-    RoomSurveyComponent.prototype.getTime = function () {
+    RoomSurveyComponent.prototype.getDate = function () {
         var date = new Date();
-        var currentTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear() + ' - ' + date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
+        //var currentTime = date.getDate() +'/'+ (date.getMonth()+1) + '/' + date.getFullYear() + ' - '+ date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds();
+        var currentTime = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
         return currentTime;
     };
-    RoomSurveyComponent.prototype.logVote = function (questionID, response, time) {
+    RoomSurveyComponent.prototype.procString = function (hour, min) {
+        if (hour.toString().length == 1) {
+            hour = '0' + hour;
+        }
+        if (min.toString().length == 1) {
+            min = '0' + min;
+        }
+        return hour + '.' + min;
+    };
+    RoomSurveyComponent.prototype.getTime = function () {
+        var date = new Date();
+        //var currentTime = date.getHours() + ':' + date.getMinutes() + ':'+ date.getSeconds();
+        var currentTime = date.getHours() + '.' + date.getMinutes();
+        //console.log(parseFloat(this.procString( 12,30)));
+        //proc string is for adding an extra 0 to unit numbers like 12:03 will be 12.3 - > pro string turns it to 12:03
+        return parseFloat(this.procString(date.getHours().toString(), date.getMinutes().toString()));
+    };
+    //need date param
+    RoomSurveyComponent.prototype.logVote = function (questionID, response, time, date) {
         var _this = this;
         if (!response) {
             return;
         }
         console.log('done');
-        this.answerService.logVote(questionID, response, time)
+        this.answerService.logVote(questionID, response, time, date)
             .then(function (error) { return _this.error = error; });
     };
     RoomSurveyComponent.prototype.handleClicks = function (i) {
         if (i == 0) {
             this.GreenCount++;
             console.log('GreenCount: ' + this.GreenCount + ' - ' + this.getTime());
-            this.logVote("5784d21e69c702ad3b000002", "green", this.getTime());
+            this.logVote("5784d21e69c702ad3b000002", "green", this.getTime(), this.getDate());
         }
         else if (i == 1) {
             this.AmberCount++;
             console.log('AmberCount: ' + this.AmberCount + ' - ' + this.getTime());
-            this.logVote("5784d21e69c702ad3b000002", "amber", this.getTime());
+            this.logVote("5784d21e69c702ad3b000002", "amber", this.getTime(), this.getDate());
         }
         else {
             this.RedCount++;
             console.log('Redcount:' + this.RedCount + ' - ' + this.getTime());
-            this.logVote("5784d21e69c702ad3b000002", "red", this.getTime());
+            this.logVote("5784d21e69c702ad3b000002", "red", this.getTime(), this.getDate());
         }
     };
     RoomSurveyComponent = __decorate([

@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
+var unique_pipe_1 = require('./unique.pipe');
 var AdminComponent = (function () {
     function AdminComponent(answerService) {
         this.answerService = answerService;
@@ -19,7 +20,22 @@ var AdminComponent = (function () {
         this.dates = [];
         this.times = [];
         this.months = [];
+        this.arr = [];
     }
+    AdminComponent.prototype.getDates = function () {
+        for (var i = 0; i < this.answers.length; i++) {
+            if (this.answers[i].date === ' ') {
+                console.log('ff');
+            }
+            else {
+                this.arr[i] = this.answers[i].date;
+            }
+            console.log(this.arr[i]);
+        }
+        //console.log(this.arr[0]);
+        this.arr = Array.from(new Set(this.arr));
+        this.fill();
+    };
     AdminComponent.prototype.getAnswers = function () {
         var _this = this;
         this.answerService
@@ -28,31 +44,36 @@ var AdminComponent = (function () {
             .catch(function (error) { return _this.error = error; });
     };
     AdminComponent.prototype.fill = function () {
-        var i;
-        for (i = 1; i <= 31; i++) {
-            console.log(i);
-            this.dates.push(i);
-        }
+        // var i:number;
+        // for( i = 1 ; i<= 31; i++)
+        // {
+        //   console.log(i);
+        //   this.dates.push(i );
+        //
+        // }
         var j;
         for (j = 0; j <= 24; j++) {
-            console.log(j);
+            //console.log(j);
             this.times.push(j + ':00');
         }
-        this.months.push('january');
-        this.months.push('feburary');
-        this.months.push('march');
-        this.months.push('april');
+        //
+        // this.months.push('january');
+        // this.months.push('feburary');
+        // this.months.push('march');
+        // this.months.push('april');
+        //
     };
     AdminComponent.prototype.ngOnInit = function () {
         this.getAnswers();
-        this.fill();
+        //this.fill();
     };
     AdminComponent = __decorate([
         core_1.Component({
             selector: 'admin-area',
             templateUrl: 'app/admin-area/admin-component.html',
             styleUrls: ['app/admin-area/admin-component.css'],
-            providers: [answer_service_1.AnswerService]
+            providers: [answer_service_1.AnswerService],
+            pipes: [unique_pipe_1.UniqueStuff]
         }), 
         __metadata('design:paramtypes', [answer_service_1.AnswerService])
     ], AdminComponent);

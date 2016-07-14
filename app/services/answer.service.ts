@@ -8,13 +8,13 @@ import { Answer } from '../models/answer';
 
 @Injectable()
 export class AnswerService {
-private heroesUrl = 'http://localhost:8080/api/answers';  // URL to web api
+private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
 
 
 constructor(private http: Http) { }
 
 getAnswers(): Promise<Answer[]> {
-    return this.http.get(this.heroesUrl)
+    return this.http.get(this.answersUrl)
                .toPromise()
                .then(response => response.json())
                .catch(this.handleError);
@@ -25,13 +25,14 @@ getAnswers(): Promise<Answer[]> {
   return body.data || { };
 }
 
+//need date param
 
-  logVote(questionID:string, response:string, time:string): Promise<Answer[]> {
+  logVote(questionID:string, response:string, time:number, date:string): Promise<Answer[]> {
     console.log('in here yass');
-    let body = JSON.stringify({ questionID ,response,time });
+    let body = JSON.stringify({ questionID ,response,time ,date});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.heroesUrl, body, options)
+    return this.http.post(this.answersUrl, body, options)
                .toPromise()
                .then(this.extractData)
                .catch(this.handleError);

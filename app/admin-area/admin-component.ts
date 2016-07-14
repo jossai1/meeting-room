@@ -1,12 +1,15 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { AnswerService } from '../services/answer.service';
 import { Answer } from '../models/answer';
+import { UniqueStuff } from './unique.pipe';
+
 
 @Component ({
     selector: 'admin-area',
     templateUrl: 'app/admin-area/admin-component.html',
     styleUrls: ['app/admin-area/admin-component.css'],
-    providers: [ AnswerService ]
+    providers: [ AnswerService ],
+    pipes: [UniqueStuff]
 })
 
 export class AdminComponent implements OnInit
@@ -18,43 +21,63 @@ export class AdminComponent implements OnInit
     dates: number[] = [];
     times: string[] = [];
     months: string[] = [];
+    arr:string[] = [];
 
 
 
     constructor(private answerService: AnswerService)
       {}
 
+      getDates()
+      // change for for loops to filters (ac to show jane)
+            {
+              for(var i =0 ; i < this.answers.length;i++)
+              {
+                if(  this.answers[i].date === ' ')
+                {
+                    console.log('ff');
+                }
+                else{
+                this.arr[i] = this.answers[i].date;}
+
+                console.log(this.arr[i]);
+                //return this.arr;
+              }
+                //console.log(this.arr[0]);
+                this.arr =  Array.from(new Set(this.arr));
+                this.fill();
+            }
       getAnswers()
       {
         this.answerService
            .getAnswers()
            .then(heroes => this.answers = heroes)
            .catch(error => this.error = error);
-
       }
 
-          fill(){
-            var i:number;
-            for( i = 1 ; i<= 31; i++)
-            {
-              console.log(i);
-              this.dates.push(i );
 
-            }
+          fill(){
+            // var i:number;
+            // for( i = 1 ; i<= 31; i++)
+            // {
+            //   console.log(i);
+            //   this.dates.push(i );
+            //
+            // }
 
             var j:number;
             for( j = 0; j<= 24; j++)
             {
-              console.log(j);
+              //console.log(j);
               this.times.push(j + ':00');
 
             }
-
-              this.months.push('january');
-              this.months.push('feburary');
-              this.months.push('march');
-              this.months.push('april');
-
+              //
+              // this.months.push('january');
+              // this.months.push('feburary');
+              // this.months.push('march');
+              // this.months.push('april');
+              //
 
 
 
@@ -63,7 +86,7 @@ export class AdminComponent implements OnInit
       ngOnInit()
       {
           this.getAnswers();
-          this.fill();
+          //this.fill();
       }
 
 

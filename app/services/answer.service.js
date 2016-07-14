@@ -14,10 +14,10 @@ require('rxjs/add/operator/toPromise');
 var AnswerService = (function () {
     function AnswerService(http) {
         this.http = http;
-        this.heroesUrl = 'http://localhost:8080/api/answers'; // URL to web api
+        this.answersUrl = 'http://localhost:8080/api/answers'; // URL to web api
     }
     AnswerService.prototype.getAnswers = function () {
-        return this.http.get(this.heroesUrl)
+        return this.http.get(this.answersUrl)
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
@@ -26,12 +26,13 @@ var AnswerService = (function () {
         var body = res.json();
         return body.data || {};
     };
-    AnswerService.prototype.logVote = function (questionID, response, time) {
+    //need date param
+    AnswerService.prototype.logVote = function (questionID, response, time, date) {
         console.log('in here yass');
-        var body = JSON.stringify({ questionID: questionID, response: response, time: time });
+        var body = JSON.stringify({ questionID: questionID, response: response, time: time, date: date });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
-        return this.http.post(this.heroesUrl, body, options)
+        return this.http.post(this.answersUrl, body, options)
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
