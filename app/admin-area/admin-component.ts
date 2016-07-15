@@ -1,7 +1,8 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { AnswerService } from '../services/answer.service';
+import { QuestionService } from '../services/question.service';
 import { Answer } from '../models/answer';
-import { DerpPipe } from './unique.pipe';
+import { Question } from '../models/question';
 import 'rxjs/Rx';
 
 
@@ -9,16 +10,16 @@ import 'rxjs/Rx';
     selector: 'admin-area',
     templateUrl: 'app/admin-area/admin-component.html',
     styleUrls: ['app/admin-area/admin-component.css'],
-    providers: [ AnswerService ],
-    pipes: [DerpPipe]
+    providers: [ AnswerService, QuestionService ]
 })
 
 export class AdminComponent implements OnInit
 {
-    myTitle = 'Admin Stuff';
-    pick = 'Pick things to compare';
+    myTitle = 'Admin';
+    pick = 'pick a date and select a time';
     error: any;
     answers: Answer[] =[];
+    results: Answer[] =[];
     dates: number[] = [];
     times: string[] = [];
     months: string[] = [];
@@ -26,12 +27,17 @@ export class AdminComponent implements OnInit
     answersTime: Answer[] =[];
     uniqTimes: string []= [];
     selectedDate:string;
+    red:number = 0;
+    green:number=0;
+    amber:number=0;
+    question: Question;
+
 
     //edited :boolean = true;
 
 
 
-    constructor(private answerService: AnswerService)
+    constructor(private answerService: AnswerService,private questionService: QuestionService)
     {}
 
 
@@ -41,7 +47,14 @@ export class AdminComponent implements OnInit
         //this.fill();
     }
 
+    getAQuestion(q_id:string)
+    {
+      this.questionService
+         .getAQuestion(q_id)
+         .then(q => this.question = q)
+         .catch(error => this.error = error);
 
+    }
 
     getDates()
     // change for for loops to filters (ac to show jane)
@@ -64,15 +77,53 @@ export class AdminComponent implements OnInit
         //this.fill();
     }
 
+
+    tally()
+    {
+      //so value doesnt change each time i click
+      this.green = 0;
+      this.amber = 0;
+      this.red = 0;
+      for(var i =0 ; i < this.results.length;i++)
+      {
+        if( this.results[i].response == 'green')
+        { this.green++;
+
+        }
+        else if ( this.results[i].response == 'amber')
+        { this.amber++;}
+
+        else if ( this.results[i].response == 'red')
+        {this.red++;}
+
+        else{}
+      }
+
+
+
+
+
+    }
+
     finalQuery(i:number)
 
     {
       var finalTime: string;
       console.log( this.uniqTimes[i] + this.selectedDate );
-
       finalTime = this.uniqTimes[i].split(":")[0] + ".0";
       console.log(  finalTime);
+      this.answerService
+         .finalQuery(this.selectedDate,parseFloat(finalTime))
+         .then(filtered => this.results = filtered)
+         .catch(error=> this.error = error);
+         if(this.results[0] == undefined)
+         {
+           this.question = 'loading..';
+         }
+         else{this.getAQuestion(this.results[0].questionID)};
+           //this.processTimes();
     }
+
 
 
     processTimes()
@@ -92,6 +143,8 @@ export class AdminComponent implements OnInit
 
       }
       this.uniqTimes =  Array.from(new Set(this.uniqTimes));
+      this.tally();
+
       console.log(this.uniqTimes.length)
 
     }
@@ -104,7 +157,7 @@ export class AdminComponent implements OnInit
          .getTimes(this.selectedDate)
          .then(filtered => this.answersTime = filtered)
          .catch(error=> this.error = error);
-           this.processTimes();
+          this.processTimes();
     }
 
 
@@ -115,6 +168,7 @@ export class AdminComponent implements OnInit
          .then(heroes => this.answers = heroes)
          .catch(error => this.error = error);
     }
+
 
 
     fill()

@@ -10,6 +10,7 @@ import { Answer } from '../models/answer';
 export class AnswerService {
 private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
 private datesQuery = 'http://localhost:8080/api/query-ans';
+private finalQueryUrl = 'http://localhost:8080/api/final-query';
 
 constructor(private http: Http) { }
 
@@ -42,9 +43,9 @@ getAnswers(): Promise<Answer[]> {
 
 
     getTimes(selectedDate:string): Promise<Answer[]> {
-      if(selectedDate !== undefined)
 
-       {console.log('its nkechi here again!!!');
+
+       console.log('its nkechi here again!!!');
        let body = JSON.stringify({selectedDate});
        let headers = new Headers({ 'Content-Type': 'application/json' });
        let options = new RequestOptions({ headers: headers });
@@ -52,8 +53,19 @@ getAnswers(): Promise<Answer[]> {
                   .toPromise() //chnaged to the res.json instaed of extract data
                   .then(response => response.json())
                   .catch(this.handleError);
-      }}
+      }
 
+
+      finalQuery(selectedDate:string,time:number ): Promise<Answer[]> {
+      console.log('its nkechi here again!!!');
+         let body = JSON.stringify({selectedDate,time});
+         let headers = new Headers({ 'Content-Type': 'application/json' });
+         let options = new RequestOptions({ headers: headers });
+         return this.http.post(this.finalQueryUrl, body, options)
+                    .toPromise() //chnaged to the res.json instaed of extract data
+                    .then(response => response.json())
+                    .catch(this.handleError);
+        }
 
   private handleError(error: any) {
      console.error('An error occurred', error);

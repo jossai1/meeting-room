@@ -10,25 +10,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
-var unique_pipe_1 = require('./unique.pipe');
+var question_service_1 = require('../services/question.service');
 require('rxjs/Rx');
 var AdminComponent = (function () {
     //edited :boolean = true;
-    function AdminComponent(answerService) {
+    function AdminComponent(answerService, questionService) {
         this.answerService = answerService;
-        this.myTitle = 'Admin Stuff';
-        this.pick = 'Pick things to compare';
+        this.questionService = questionService;
+        this.myTitle = 'Admin';
+        this.pick = 'pick a date and select a time';
         this.answers = [];
+        this.results = [];
         this.dates = [];
         this.times = [];
         this.months = [];
         this.arr = [];
         this.answersTime = [];
         this.uniqTimes = [];
+        this.red = 0;
+        this.green = 0;
+        this.amber = 0;
     }
     AdminComponent.prototype.ngOnInit = function () {
         this.getAnswers();
         //this.fill();
+    };
+    AdminComponent.prototype.getAQuestion = function (q_id) {
+        var _this = this;
+        this.questionService
+            .getAQuestion(q_id)
+            .then(function (q) { return _this.question = q; })
+            .catch(function (error) { return _this.error = error; });
     };
     AdminComponent.prototype.getDates = function () {
         for (var i = 0; i < this.answers.length; i++) {
@@ -43,11 +55,42 @@ var AdminComponent = (function () {
         this.arr = this.arr.filter(function (n) { return n != undefined; });
         //this.fill();
     };
+    AdminComponent.prototype.tally = function () {
+        //so value doesnt change each time i click
+        this.green = 0;
+        this.amber = 0;
+        this.red = 0;
+        for (var i = 0; i < this.results.length; i++) {
+            if (this.results[i].response == 'green') {
+                this.green++;
+            }
+            else if (this.results[i].response == 'amber') {
+                this.amber++;
+            }
+            else if (this.results[i].response == 'red') {
+                this.red++;
+            }
+            else { }
+        }
+    };
     AdminComponent.prototype.finalQuery = function (i) {
+        var _this = this;
         var finalTime;
         console.log(this.uniqTimes[i] + this.selectedDate);
         finalTime = this.uniqTimes[i].split(":")[0] + ".0";
         console.log(finalTime);
+        this.answerService
+            .finalQuery(this.selectedDate, parseFloat(finalTime))
+            .then(function (filtered) { return _this.results = filtered; })
+            .catch(function (error) { return _this.error = error; });
+        if (this.results[0] == undefined) {
+            this.question = 'loading..';
+        }
+        else {
+            this.getAQuestion(this.results[0].questionID);
+        }
+        ;
+        //this.processTimes();
     };
     AdminComponent.prototype.processTimes = function () {
         console.log('i made it o');
@@ -60,6 +103,7 @@ var AdminComponent = (function () {
             this.uniqTimes[i] = this.uniqTimes[i].split(".")[0] + ":00";
         }
         this.uniqTimes = Array.from(new Set(this.uniqTimes));
+        this.tally();
         console.log(this.uniqTimes.length);
     };
     /** envoked by a date button-  should return all times things were recorded in the selected date */
@@ -105,10 +149,9 @@ var AdminComponent = (function () {
             selector: 'admin-area',
             templateUrl: 'app/admin-area/admin-component.html',
             styleUrls: ['app/admin-area/admin-component.css'],
-            providers: [answer_service_1.AnswerService],
-            pipes: [unique_pipe_1.DerpPipe]
+            providers: [answer_service_1.AnswerService, question_service_1.QuestionService]
         }), 
-        __metadata('design:paramtypes', [answer_service_1.AnswerService])
+        __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService])
     ], AdminComponent);
     return AdminComponent;
 }());

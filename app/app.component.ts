@@ -5,9 +5,13 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'my-app',
     template: `
     <nav>
-      <a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a>
-      <a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a>
-    </nav>
+    <div class="nav-wrapper">
+      <ul class="">
+        <li><a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a></li>
+        <li><a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a></li>
+      </ul>
+    </div>
+  </nav>
     <router-outlet></router-outlet>`,
     directives: [ROUTER_DIRECTIVES]
 })
@@ -15,3 +19,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 export class AppComponent {
     title = 'we want better meetings!';
 }
+// <nav>
+//   <a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a>
+//   <a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a>
+// </nav>

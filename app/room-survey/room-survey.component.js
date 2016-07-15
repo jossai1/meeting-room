@@ -20,7 +20,7 @@ var RoomSurveyComponent = (function () {
         this.GreenCount = 0;
         this.RedCount = 0;
         this.AmberCount = 0;
-        this.title = 'Room Survey Stuff';
+        this.title = 'Room Survey';
         this.smiles = ':) :/ :(';
         this.questions = [];
         //an array of strings

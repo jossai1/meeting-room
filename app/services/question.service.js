@@ -14,11 +14,22 @@ require('rxjs/add/operator/toPromise');
 var QuestionService = (function () {
     function QuestionService(http) {
         this.http = http;
-        this.questionUrl = 'http://localhost:8080/api/questions'; // URL to web api
+        this.questionUrl = 'http://localhost:8080/api/questions';
+        this.theQuestionUrl = 'http://localhost:8080/api/get-q'; // URL to web api
     }
     QuestionService.prototype.getQuestions = function () {
         return this.http.get(this.questionUrl)
             .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    QuestionService.prototype.getAQuestion = function (q_id) {
+        console.log('getting question...');
+        var body = JSON.stringify({ q_id: q_id });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.theQuestionUrl, body, options)
+            .toPromise() //chnaged to the res.json instaed of extract data
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };

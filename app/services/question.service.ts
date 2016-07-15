@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, RequestOptions } from '@angular/http';
 
 import { Question } from '../models/question';
 
@@ -10,7 +10,8 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class QuestionService
 {
-  private questionUrl = 'http://localhost:8080/api/questions';  // URL to web api
+  private questionUrl = 'http://localhost:8080/api/questions';
+  private theQuestionUrl = 'http://localhost:8080/api/get-q';  // URL to web api
 
   constructor(private http: Http) {}
 
@@ -20,6 +21,18 @@ export class QuestionService
                  .toPromise()
                  .then(response => response.json())
                  .catch(this.handleError);
+  }
+
+  getAQuestion(q_id:string): Promise<Question>
+  {
+    console.log('getting question...');
+    let body = JSON.stringify({q_id});
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.theQuestionUrl, body, options)
+               .toPromise() //chnaged to the res.json instaed of extract data
+               .then(response => response.json())
+               .catch(this.handleError);
   }
 
   private handleError(error: any)

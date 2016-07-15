@@ -16,6 +16,7 @@ var AnswerService = (function () {
         this.http = http;
         this.answersUrl = 'http://localhost:8080/api/answers'; // URL to web api
         this.datesQuery = 'http://localhost:8080/api/query-ans';
+        this.finalQueryUrl = 'http://localhost:8080/api/final-query';
     }
     AnswerService.prototype.getAnswers = function () {
         return this.http.get(this.answersUrl)
@@ -39,16 +40,24 @@ var AnswerService = (function () {
             .catch(this.handleError);
     };
     AnswerService.prototype.getTimes = function (selectedDate) {
-        if (selectedDate !== undefined) {
-            console.log('its nkechi here again!!!');
-            var body = JSON.stringify({ selectedDate: selectedDate });
-            var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-            var options = new http_1.RequestOptions({ headers: headers });
-            return this.http.post(this.datesQuery, body, options)
-                .toPromise() //chnaged to the res.json instaed of extract data
-                .then(function (response) { return response.json(); })
-                .catch(this.handleError);
-        }
+        console.log('its nkechi here again!!!');
+        var body = JSON.stringify({ selectedDate: selectedDate });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.datesQuery, body, options)
+            .toPromise() //chnaged to the res.json instaed of extract data
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    AnswerService.prototype.finalQuery = function (selectedDate, time) {
+        console.log('its nkechi here again!!!');
+        var body = JSON.stringify({ selectedDate: selectedDate, time: time });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.finalQueryUrl, body, options)
+            .toPromise() //chnaged to the res.json instaed of extract data
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
     };
     AnswerService.prototype.handleError = function (error) {
         console.error('An error occurred', error);

@@ -6,9 +6,9 @@ body {
 
 
 /* everywhere else */
-* {
+/** {
   font-family: Arial, Helvetica, sans-serif;
-}
+}*/
 
 /*some hovering stuff- to chnage to something better*/
  img:hover {

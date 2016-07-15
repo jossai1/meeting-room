@@ -24,7 +24,7 @@ export class RoomSurveyComponent implements OnInit
     GreenCount: number = 0;
     RedCount: number = 0;
     AmberCount: number = 0;
-    title = 'Room Survey Stuff';
+    title = 'Room Survey';
     smiles = ':) :/ :(';
     questions: Question[] =[];
 

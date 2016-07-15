@@ -17,7 +17,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n    <nav>\n      <a [routerLink]=\"['/room-survey']\" routerLinkActive=\"active\">Survey</a>\n      <a [routerLink]=\"['/admin-area']\" routerLinkActive=\"active\">Admin</a>\n    </nav>\n    <router-outlet></router-outlet>",
+            template: "\n    <nav>\n    <div class=\"nav-wrapper\">\n      <ul class=\"\">\n        <li><a [routerLink]=\"['/room-survey']\" routerLinkActive=\"active\">Survey</a></li>\n        <li><a [routerLink]=\"['/admin-area']\" routerLinkActive=\"active\">Admin</a></li>\n      </ul>\n    </div>\n  </nav>\n    <router-outlet></router-outlet>",
             directives: [router_1.ROUTER_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [])
@@ -25,4 +25,8 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
+// <nav>
+//   <a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a>
+//   <a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a>
+// </nav>
 //# sourceMappingURL=app.component.js.map
