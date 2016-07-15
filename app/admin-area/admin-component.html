@@ -1,31 +1,39 @@
 <h1>{{ myTitle }}</h1> <h2>{{ pick }}</h2>
+
+<small> select a date </small>
 <button (click)="getDates()" > Give me the dates  </button>
 
-<form class="date-box" action="">
-  <select name="dates" >
-    <option *ngFor="let day of arr; let i = index" value="day"> {{arr[i] }} </option>
-    <!-- <option *ngFor="let day of dates; let i = index" value="day"> {{dates[i]}} </option> -->
-  </select>
   <br><br>
 
+  <small> double click the date you want to view times for</small>
+  <button *ngFor="let day of arr; let j = index" value="day" (click)="getTimes(j)"> {{arr[j]}} </button>
+
+
+<hr><hr>
+  <button *ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i,j)" > {{uniqTimes[i]}} </button>
+
+
   <!-- <form class="month-box" action="">
-    <select name="months" >
-      <option *ngFor="let month of months; let i = index" value="month"> {{months[i]}} </option>
+    <select name="months">
+      <option *ngFor="let time of uniqTimes; let i = index" value="time" > {{uniqTimes[i]}} </option>
     </select>
   </form> -->
 
+<br><br>
+  <button (click)="processTimes()" > give me times  </button>
+
+
+<!--
   <form class="month-box" action="">
     <select name="months" >
-      <option *ngFor="let time of times; let i = index" value="time"> {{times[i]}} </option>
+      <option *ngFor="let time of answersTime; let i = index" value="time"> {{answersTime[i]}} </option>
     </select>
-  </form>
+  </form> -->
 
-</form>
-
+<!-- </form> -->
 
 <div class= "answers" *ngFor= "let uniqdates of arr">
   <p> {{uniqdates}}  </p>
-
   <!-- <p> QUESTIONID: {{answer.questionID}}     RESPONSE: {{answer.response}}  </p> -->
 </div>
 

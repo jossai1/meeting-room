@@ -9,7 +9,7 @@ import { Answer } from '../models/answer';
 @Injectable()
 export class AnswerService {
 private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
-
+private datesQuery = 'http://localhost:8080/api/query-ans';
 
 constructor(private http: Http) { }
 
@@ -38,6 +38,22 @@ getAnswers(): Promise<Answer[]> {
                .catch(this.handleError);
 
     }
+
+
+
+    getTimes(selectedDate:string): Promise<Answer[]> {
+      if(selectedDate !== undefined)
+
+       {console.log('its nkechi here again!!!');
+       let body = JSON.stringify({selectedDate});
+       let headers = new Headers({ 'Content-Type': 'application/json' });
+       let options = new RequestOptions({ headers: headers });
+       return this.http.post(this.datesQuery, body, options)
+                  .toPromise() //chnaged to the res.json instaed of extract data
+                  .then(response => response.json())
+                  .catch(this.handleError);
+      }}
+
 
   private handleError(error: any) {
      console.error('An error occurred', error);

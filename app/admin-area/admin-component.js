@@ -11,7 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
 var unique_pipe_1 = require('./unique.pipe');
+require('rxjs/Rx');
 var AdminComponent = (function () {
+    //edited :boolean = true;
     function AdminComponent(answerService) {
         this.answerService = answerService;
         this.myTitle = 'Admin Stuff';
@@ -21,20 +23,55 @@ var AdminComponent = (function () {
         this.times = [];
         this.months = [];
         this.arr = [];
+        this.answersTime = [];
+        this.uniqTimes = [];
     }
+    AdminComponent.prototype.ngOnInit = function () {
+        this.getAnswers();
+        //this.fill();
+    };
     AdminComponent.prototype.getDates = function () {
         for (var i = 0; i < this.answers.length; i++) {
-            if (this.answers[i].date === ' ') {
-                console.log('ff');
-            }
+            if (this.answers[i].date == undefined) { }
             else {
                 this.arr[i] = this.answers[i].date;
             }
             console.log(this.arr[i]);
         }
-        //console.log(this.arr[0]);
         this.arr = Array.from(new Set(this.arr));
-        this.fill();
+        //removing undefined stuff
+        this.arr = this.arr.filter(function (n) { return n != undefined; });
+        //this.fill();
+    };
+    AdminComponent.prototype.finalQuery = function (i) {
+        var finalTime;
+        console.log(this.uniqTimes[i] + this.selectedDate);
+        finalTime = this.uniqTimes[i].split(":")[0] + ".0";
+        console.log(finalTime);
+    };
+    AdminComponent.prototype.processTimes = function () {
+        console.log('i made it o');
+        //uniqTimes;
+        //put times in an array - so we can make it unique
+        for (var i = 0; i < this.answersTime.length; i++) {
+            this.uniqTimes[i] = this.answersTime[i].time.toString();
+        }
+        for (var i = 0; i < this.uniqTimes.length; i++) {
+            this.uniqTimes[i] = this.uniqTimes[i].split(".")[0] + ":00";
+        }
+        this.uniqTimes = Array.from(new Set(this.uniqTimes));
+        console.log(this.uniqTimes.length);
+    };
+    /** envoked by a date button-  should return all times things were recorded in the selected date */
+    AdminComponent.prototype.getTimes = function (i) {
+        var _this = this;
+        this.selectedDate = this.arr[i];
+        console.log(this.selectedDate);
+        this.answerService
+            .getTimes(this.selectedDate)
+            .then(function (filtered) { return _this.answersTime = filtered; })
+            .catch(function (error) { return _this.error = error; });
+        this.processTimes();
     };
     AdminComponent.prototype.getAnswers = function () {
         var _this = this;
@@ -63,17 +100,13 @@ var AdminComponent = (function () {
         // this.months.push('april');
         //
     };
-    AdminComponent.prototype.ngOnInit = function () {
-        this.getAnswers();
-        //this.fill();
-    };
     AdminComponent = __decorate([
         core_1.Component({
             selector: 'admin-area',
             templateUrl: 'app/admin-area/admin-component.html',
             styleUrls: ['app/admin-area/admin-component.css'],
             providers: [answer_service_1.AnswerService],
-            pipes: [unique_pipe_1.UniqueStuff]
+            pipes: [unique_pipe_1.DerpPipe]
         }), 
         __metadata('design:paramtypes', [answer_service_1.AnswerService])
     ], AdminComponent);

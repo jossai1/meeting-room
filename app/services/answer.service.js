@@ -15,6 +15,7 @@ var AnswerService = (function () {
     function AnswerService(http) {
         this.http = http;
         this.answersUrl = 'http://localhost:8080/api/answers'; // URL to web api
+        this.datesQuery = 'http://localhost:8080/api/query-ans';
     }
     AnswerService.prototype.getAnswers = function () {
         return this.http.get(this.answersUrl)
@@ -36,6 +37,18 @@ var AnswerService = (function () {
             .toPromise()
             .then(this.extractData)
             .catch(this.handleError);
+    };
+    AnswerService.prototype.getTimes = function (selectedDate) {
+        if (selectedDate !== undefined) {
+            console.log('its nkechi here again!!!');
+            var body = JSON.stringify({ selectedDate: selectedDate });
+            var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+            var options = new http_1.RequestOptions({ headers: headers });
+            return this.http.post(this.datesQuery, body, options)
+                .toPromise() //chnaged to the res.json instaed of extract data
+                .then(function (response) { return response.json(); })
+                .catch(this.handleError);
+        }
     };
     AnswerService.prototype.handleError = function (error) {
         console.error('An error occurred', error);
