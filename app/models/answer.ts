@@ -6,6 +6,3 @@ export class Answer {
   date: string;
   __v: number;
 }
-
-
-//need date field

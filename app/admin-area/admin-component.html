@@ -1,42 +1,37 @@
 <h1 class=" blue-grey-text" >{{ myTitle }}</h1>
-  <h5 class=" blue-grey-text" >{{ pick }}</h5>
-  <br><br>
+<h5 class=" blue-grey-text" >{{ pick }}</h5>
+
+<br><br>
 
 <small class=" blue-grey-text" > select a date:   </small>
 
 <!-- <button (click)="getDates()" > Give me the dates  </button> -->
 <a class="waves-effect waves-light btn"  (click)="getDates()" > Give me the dates  </a>
 
-  <br><br>
+<br><br>
 
-  <small class=" blue-grey-text"> double click buttons to see updated changes:   </small>
-  <!-- old style button without materialze <button *ngFor="let day of arr; let j = index" value="day" (click)="getTimes(j)"> {{arr[j]}} </button> -->
-  <a class="waves-effect waves-light btn" *ngFor="let day of arr; let j = index" value="day" (click)="getTimes(j)"> {{arr[j]}} </a>
+<small class=" blue-grey-text"> double click buttons to see updated changes:   </small>
+  <!-- old style button without materialze <button *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </button> -->
+
+<a class="waves-effect waves-light btn" *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </a>
 
 
-  <hr class="styled-hr" style="width:100%;">
-  <!-- <button *ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </button> -->
-  <a class="waves-effect waves-light btn"*ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </a>
+<hr class="styled-hr" style="width:100%;">
 
-  <!-- <form class="month-box" action="">
-    <select name="months">
-      <option *ngFor="let time of uniqTimes; let i = index" value="time" > {{uniqTimes[i]}} </option>
-    </select>
-  </form> -->
+<!-- <button *ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </button> -->
+<a class="waves-effect waves-light btn"*ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </a>
 
 
 <br><br>
-  <!-- <button (click)="tally()" > Tally   </button> -->
-  <a class="waves-effect waves-light btn"  (click)="tally()" > Tally   </a>
-  <!-- <p> Question: {{question}}</p>
-  <p> red: {{red}}</p>
-  <p> green : {{green}}</p>
-  <p> amber : {{amber}}</p> -->
+
+<!-- <button (click)="tally()" > Tally   </button> -->
+<a class="waves-effect waves-light btn"  (click)="tally()" > Tally   </a>
+
 <div class ="con">
   <div class="col">
     <div class="col s12 m5">
       <div class="card-panel grey">
-      <p> Question: {{question}}</p>
+      <p> Question: {{question.questionText}}</p>
       </div>
     </div>
   </div>
@@ -62,16 +57,3 @@
     </div>
   </div>
 </div>
-
-<!--
-  <form class="month-box" action="">
-    <select name="months" >
-      <option *ngFor="let time of answersTime; let i = index" value="time"> {{answersTime[i]}} </option>
-    </select>
-  </form> -->
-
-<!-- </form> -->
-
-<!-- <div class= "" *ngFor= "let answer of results">
-  <p> {{answer.response }}  </p>
-</div> -->

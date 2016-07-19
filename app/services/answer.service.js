@@ -28,7 +28,6 @@ var AnswerService = (function () {
         var body = res.json();
         return body.data || {};
     };
-    //need date param
     AnswerService.prototype.logVote = function (questionID, response, time, date) {
         console.log('in here yass');
         var body = JSON.stringify({ questionID: questionID, response: response, time: time, date: date });

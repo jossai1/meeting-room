@@ -23,6 +23,7 @@ var QuestionService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    //get a questuion that nmatches the given QID
     QuestionService.prototype.getAQuestion = function (q_id) {
         console.log('getting question...');
         var body = JSON.stringify({ q_id: q_id });

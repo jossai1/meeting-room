@@ -20,21 +20,14 @@ export class AdminComponent implements OnInit
     error: any;
     answers: Answer[] =[];
     results: Answer[] =[];
-    dates: number[] = [];
-    times: string[] = [];
-    months: string[] = [];
-    arr:string[] = [];
+    uniqDatesArr:string[] = [];
     answersTime: Answer[] =[];
     uniqTimes: string []= [];
     selectedDate:string;
     red:number = 0;
     green:number=0;
     amber:number=0;
-    question: Question;
-
-
-    //edited :boolean = true;
-
+    question: Question = new Question(); //question that was asked //  question: Question;
 
 
     constructor(private answerService: AnswerService,private questionService: QuestionService)
@@ -44,7 +37,6 @@ export class AdminComponent implements OnInit
     ngOnInit()
     {
         this.getAnswers();
-        //this.fill();
     }
 
     getAQuestion(q_id:string)
@@ -56,31 +48,32 @@ export class AdminComponent implements OnInit
 
     }
 
+    //involved by 'give me fates button'
+    // to get all the unique times of when answers where logged
+    // get all the unique dates from the answers array
     getDates()
     // change for for loops to filters (ac to show jane)
     {
         for(var i =0 ; i < this.answers.length;i++)
         {
-          if(  this.answers[i].date == undefined )
-          { /*do nothing */}
-          else
-          {
-              this.arr[i] = this.answers[i].date;
-          }
 
-          console.log(this.arr[i]);
-
+            this.uniqDatesArr[i] = this.answers[i].date;
+            console.log(this.uniqDatesArr[i]);
         }
-        this.arr =  Array.from(new Set(this.arr));
-        //removing undefined stuff
-        this.arr = this.arr.filter(function(n){ return n != undefined });
-        //this.fill();
+        //remove duplicate dates
+        this.uniqDatesArr =  Array.from(new Set(this.uniqDatesArr));
+
+        //removing undefined stuff/ items from the uuniqDatesArr
+        this.uniqDatesArr = this.uniqDatesArr.filter(function(n){ return n != undefined });
     }
 
 
+
+    //this was a quick fix to display the votes of a date and time query , wasnt updating viotes properly before I added the 'tally' button
+    //displays/updates the g,r,a counts
     tally()
     {
-      //so value doesnt change each time i click
+      //initialise to 0. ..so value doesnt change each time i click
       this.green = 0;
       this.amber = 0;
       this.red = 0;
@@ -99,14 +92,13 @@ export class AdminComponent implements OnInit
         else{}
       }
 
-
-
-
-
     }
 
-    finalQuery(i:number)
 
+    //method invoke by clicking a time button - this concludes tyhe selecting phase - time and date have been selected
+    // i is the time index of time the user selceted
+    // calls the answer service to fetch query results based on date and time selceted
+    finalQuery(i:number)
     {
       var finalTime: string;
       console.log( this.uniqTimes[i] + this.selectedDate );
@@ -116,42 +108,47 @@ export class AdminComponent implements OnInit
          .finalQuery(this.selectedDate,parseFloat(finalTime))
          .then(filtered => this.results = filtered)
          .catch(error=> this.error = error);
+
+         //a fix because it odesnt update manually the question is initially null
          if(this.results[0] == undefined)
          {
-           this.question = 'loading..';
+           //this.question = "loading..";
          }
-         else{this.getAQuestion(this.results[0].questionID)};
-           //this.processTimes();
+         //set the question asked - by using the answers qid--- search by qid and get the questiontext
+         else
+         {
+           this.getAQuestion(this.results[0].questionID)
+         };
     }
-
 
 
     processTimes()
     {
 
       console.log('i made it o');
-      //uniqTimes;
       //put times in an array - so we can make it unique
       for(var i =0 ; i < this.answersTime.length;i++)
       {
         this.uniqTimes[i] = this.answersTime[i].time.toString();
-
       }
+
       for(var i =0 ; i < this.uniqTimes.length;i++)
       {
           this.uniqTimes[i] =   this.uniqTimes[i].split(".")[0] + ":00";
-
       }
+
       this.uniqTimes =  Array.from(new Set(this.uniqTimes));
       this.tally();
 
       console.log(this.uniqTimes.length)
-
     }
-    /** envoked by a date button-  should return all times things were recorded in the selected date */
+
+
+    /** envoked by a date button-  should return all times responses were recorded in the selected date */
+    // calls 'processTimes' method which filters them to get unique times and add a :00 at teh end
     getTimes(i:number)
     {
-      this.selectedDate = this.arr[i];
+      this.selectedDate = this.uniqDatesArr[i];
       console.log(this.selectedDate);
       this.answerService
          .getTimes(this.selectedDate)
@@ -167,33 +164,6 @@ export class AdminComponent implements OnInit
          .getAnswers()
          .then(heroes => this.answers = heroes)
          .catch(error => this.error = error);
-    }
-
-
-
-    fill()
-    {
-      // var i:number;
-      // for( i = 1 ; i<= 31; i++)
-      // {
-      //   console.log(i);
-      //   this.dates.push(i );
-      //
-      // }
-
-      var j:number;
-      for( j = 0; j<= 24; j++)
-      {
-        //console.log(j);
-        this.times.push(j + ':00');
-
-      }
-        //
-        // this.months.push('january');
-        // this.months.push('feburary');
-        // this.months.push('march');
-        // this.months.push('april');
-        //
     }
 
 

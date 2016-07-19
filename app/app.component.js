@@ -25,8 +25,4 @@ var AppComponent = (function () {
     return AppComponent;
 }());
 exports.AppComponent = AppComponent;
-// <nav>
-//   <a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a>
-//   <a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a>
-// </nav>
 //# sourceMappingURL=app.component.js.map

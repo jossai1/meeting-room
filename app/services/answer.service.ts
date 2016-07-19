@@ -21,12 +21,11 @@ getAnswers(): Promise<Answer[]> {
                .catch(this.handleError);
   }
 
+
   private extractData(res: Response) {
   let body = res.json();
   return body.data || { };
 }
-
-//need date param
 
   logVote(questionID:string, response:string, time:number, date:string): Promise<Answer[]> {
     console.log('in here yass');
@@ -40,10 +39,7 @@ getAnswers(): Promise<Answer[]> {
 
     }
 
-
-
     getTimes(selectedDate:string): Promise<Answer[]> {
-
 
        console.log('its nkechi here again!!!');
        let body = JSON.stringify({selectedDate});

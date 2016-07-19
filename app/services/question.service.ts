@@ -23,6 +23,7 @@ export class QuestionService
                  .catch(this.handleError);
   }
 
+  //get a questuion that nmatches the given QID
   getAQuestion(q_id:string): Promise<Question>
   {
     console.log('getting question...');

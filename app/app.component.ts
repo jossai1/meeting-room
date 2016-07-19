@@ -19,7 +19,3 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 export class AppComponent {
     title = 'we want better meetings!';
 }
-// <nav>
-//   <a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a>
-//   <a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a>
-// </nav>

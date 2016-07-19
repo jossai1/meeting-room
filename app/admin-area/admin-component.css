@@ -1,21 +1,26 @@
 
-  select {
-      width:200px;
-  }
-  h5{
-    font-weight: 200;
-  }
+select
+{
+    width:200px;
+}
+
+h5
+{
+  font-weight: 200;
+}
 
 .card-panel
 {
   text-align: center;
 }
 
-P{
+P
+{
     font-size: 25px;
     font-weight: 200;
 }
 
-hr.styled-hr {
+hr.styled-hr
+{
     background-color: #d0d0d0;;
 }

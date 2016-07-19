@@ -11,9 +11,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
 var question_service_1 = require('../services/question.service');
+var question_1 = require('../models/question');
 require('rxjs/Rx');
 var AdminComponent = (function () {
-    //edited :boolean = true;
     function AdminComponent(answerService, questionService) {
         this.answerService = answerService;
         this.questionService = questionService;
@@ -21,19 +21,16 @@ var AdminComponent = (function () {
         this.pick = 'pick a date and select a time';
         this.answers = [];
         this.results = [];
-        this.dates = [];
-        this.times = [];
-        this.months = [];
-        this.arr = [];
+        this.uniqDatesArr = [];
         this.answersTime = [];
         this.uniqTimes = [];
         this.red = 0;
         this.green = 0;
         this.amber = 0;
+        this.question = new question_1.Question(); //question that was asked //  question: Question;
     }
     AdminComponent.prototype.ngOnInit = function () {
         this.getAnswers();
-        //this.fill();
     };
     AdminComponent.prototype.getAQuestion = function (q_id) {
         var _this = this;
@@ -42,21 +39,23 @@ var AdminComponent = (function () {
             .then(function (q) { return _this.question = q; })
             .catch(function (error) { return _this.error = error; });
     };
+    //involved by 'give me fates button'
+    // to get all the unique times of when answers where logged
+    // get all the unique dates from the answers array
     AdminComponent.prototype.getDates = function () {
         for (var i = 0; i < this.answers.length; i++) {
-            if (this.answers[i].date == undefined) { }
-            else {
-                this.arr[i] = this.answers[i].date;
-            }
-            console.log(this.arr[i]);
+            this.uniqDatesArr[i] = this.answers[i].date;
+            console.log(this.uniqDatesArr[i]);
         }
-        this.arr = Array.from(new Set(this.arr));
-        //removing undefined stuff
-        this.arr = this.arr.filter(function (n) { return n != undefined; });
-        //this.fill();
+        //remove duplicate dates
+        this.uniqDatesArr = Array.from(new Set(this.uniqDatesArr));
+        //removing undefined stuff/ items from the uuniqDatesArr
+        this.uniqDatesArr = this.uniqDatesArr.filter(function (n) { return n != undefined; });
     };
+    //this was a quick fix to display the votes of a date and time query , wasnt updating viotes properly before I added the 'tally' button
+    //displays/updates the g,r,a counts
     AdminComponent.prototype.tally = function () {
-        //so value doesnt change each time i click
+        //initialise to 0. ..so value doesnt change each time i click
         this.green = 0;
         this.amber = 0;
         this.red = 0;
@@ -73,6 +72,9 @@ var AdminComponent = (function () {
             else { }
         }
     };
+    //method invoke by clicking a time button - this concludes tyhe selecting phase - time and date have been selected
+    // i is the time index of time the user selceted
+    // calls the answer service to fetch query results based on date and time selceted
     AdminComponent.prototype.finalQuery = function (i) {
         var _this = this;
         var finalTime;
@@ -83,18 +85,16 @@ var AdminComponent = (function () {
             .finalQuery(this.selectedDate, parseFloat(finalTime))
             .then(function (filtered) { return _this.results = filtered; })
             .catch(function (error) { return _this.error = error; });
+        //a fix because it odesnt update manually the question is initially null
         if (this.results[0] == undefined) {
-            this.question = 'loading..';
         }
         else {
             this.getAQuestion(this.results[0].questionID);
         }
         ;
-        //this.processTimes();
     };
     AdminComponent.prototype.processTimes = function () {
         console.log('i made it o');
-        //uniqTimes;
         //put times in an array - so we can make it unique
         for (var i = 0; i < this.answersTime.length; i++) {
             this.uniqTimes[i] = this.answersTime[i].time.toString();
@@ -106,10 +106,11 @@ var AdminComponent = (function () {
         this.tally();
         console.log(this.uniqTimes.length);
     };
-    /** envoked by a date button-  should return all times things were recorded in the selected date */
+    /** envoked by a date button-  should return all times responses were recorded in the selected date */
+    // calls 'processTimes' method which filters them to get unique times and add a :00 at teh end
     AdminComponent.prototype.getTimes = function (i) {
         var _this = this;
-        this.selectedDate = this.arr[i];
+        this.selectedDate = this.uniqDatesArr[i];
         console.log(this.selectedDate);
         this.answerService
             .getTimes(this.selectedDate)
@@ -123,26 +124,6 @@ var AdminComponent = (function () {
             .getAnswers()
             .then(function (heroes) { return _this.answers = heroes; })
             .catch(function (error) { return _this.error = error; });
-    };
-    AdminComponent.prototype.fill = function () {
-        // var i:number;
-        // for( i = 1 ; i<= 31; i++)
-        // {
-        //   console.log(i);
-        //   this.dates.push(i );
-        //
-        // }
-        var j;
-        for (j = 0; j <= 24; j++) {
-            //console.log(j);
-            this.times.push(j + ':00');
-        }
-        //
-        // this.months.push('january');
-        // this.months.push('feburary');
-        // this.months.push('march');
-        // this.months.push('april');
-        //
     };
     AdminComponent = __decorate([
         core_1.Component({
