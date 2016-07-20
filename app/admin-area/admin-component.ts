@@ -36,8 +36,13 @@ export class AdminComponent implements OnInit
 
     ngOnInit()
     {
+        setTimeout(() => {
+          this.getAnswers();
+          setTimeout(() => {
+            this.getDates();
+          }, 50);
+        }, 100);
 
-        this.getAnswers();
     }
 
     getAQuestion(q_id:string)
@@ -49,7 +54,7 @@ export class AdminComponent implements OnInit
 
     }
 
-    //involved by 'give me fates button'
+    //invoked by 'give me dates button'
     // to get all the unique times of when answers where logged
     // get all the unique dates from the answers array
     getDates()
@@ -69,10 +74,10 @@ export class AdminComponent implements OnInit
     }
 
 
-
+    //TODO: change method name TallySurveyAnswers
     //this was a quick fix to display the votes of a date and time query , wasnt updating viotes properly before I added the 'tally' button
     //displays/updates the g,r,a counts
-    tally()
+    tallySurveyAnswers()
     {
       //initialise to 0. ..so value doesnt change each time i click
       this.green = 0;
@@ -96,40 +101,55 @@ export class AdminComponent implements OnInit
 
     }
 
-
+    //TODO: change method name
     //method invoke by clicking a time button - this concludes tyhe selecting phase - time and date have been selected
     // i is the time index of time the user selceted
     // calls the answer service to fetch query results based on date and time selceted
-    finalQuery(i:number)
+    finalQuery( i:number )
     {
       var finalTime: string;
       console.log( this.uniqTimes[i] + this.selectedDate );
       finalTime = this.uniqTimes[i].split(":")[0] + ".0";
       console.log(  finalTime);
-      this.answerService
-         .finalQuery(this.selectedDate,parseFloat(finalTime))
-         .then(filtered => this.results = filtered)
-         .catch(error=> this.error = error);
+      setTimeout(() => {
+        this.answerService
+           .finalQuery(this.selectedDate,parseFloat(finalTime))
+           .then(filtered => this.results = filtered)
+           .catch(error=> this.error = error);
+        setTimeout(() => {
+          this.getAQuestion(this.results[this.results.length - 1 ].questionID);
+          this.tallySurveyAnswers();
+        }, 50);
+      }, 100);
+
+
+
+      // var finalTime: string;
+      // console.log( this.uniqTimes[i] + this.selectedDate );
+      // finalTime = this.uniqTimes[i].split(":")[0] + ".0";
+      // console.log(  finalTime);
+      // this.answerService
+      //    .finalQuery(this.selectedDate,parseFloat(finalTime))
+      //    .then(filtered => this.results = filtered)
+      //    .catch(error=> this.error = error);
 
          //a fix because it odesnt update manually the question is initially null
-         if(this.results[0] == undefined)
-         {
-           //this.question = "loading..";
-         }
-         //set the question asked - by using the answers qid--- search by qid and get the questiontext
-         else
-         {
-          //console.log("hi ih ihih "+ this.results[0].questionID);
-            //this.question.questionText = this.results[0].questionID;
-           this.getAQuestion(this.results[this.results.length - 1 ].questionID);
-         };
+        //  if(this.results[0] == undefined)
+        //  {
+        //    //this.question = "loading..";
+        //  }
+        //  //set the question asked - by using the answers qid--- search by qid and get the questiontext
+        //  else
+        //  {
+        //   //console.log("hi ih ihih "+ this.results[0].questionID);
+        //     //this.question.questionText = this.results[0].questionID;
+        //    this.getAQuestion(this.results[this.results.length - 1 ].questionID);
+        //  };
     }
 
 
     processTimes()
     {
-
-      console.log('i made it o');
       //put times in an array - so we can make it unique
       for(var i =0 ; i < this.answersTime.length;i++)
       {
@@ -142,9 +162,9 @@ export class AdminComponent implements OnInit
       }
 
       this.uniqTimes =  Array.from(new Set(this.uniqTimes));
-      this.tally();
-
-      console.log(this.uniqTimes.length)
+      // this.tallySurveyAnswers();
+      //
+      // console.log(this.uniqTimes.length)
     }
 
 
@@ -154,19 +174,37 @@ export class AdminComponent implements OnInit
     {
       this.selectedDate = this.uniqDatesArr[i];
       console.log(this.selectedDate);
-      this.answerService
-         .getTimes(this.selectedDate)
-         .then(filtered => this.answersTime = filtered)
-         .catch(error=> this.error = error);
-          this.processTimes();
-    }
+
+
+      setTimeout(() => {
+
+        this.answerService
+           .getTimes(this.selectedDate)
+           .then(filtered => this.answersTime = filtered)
+           .catch(error=> this.error = error);
+
+        setTimeout(() => {
+            this.processTimes();
+        }, 50);
+
+      }, 50);
+
+    //       this.selectedDate = this.uniqDatesArr[i];
+    //         console.log(this.selectedDate);
+    //         this.answerService
+    //            .getTimes(this.selectedDate)
+    //            .then(filtered => this.answersTime = filtered)
+    //            .catch(error=> this.error = error);
+    //             this.processTimes();
+    //
+  }
 
 
     getAnswers()
     {
       this.answerService
          .getAnswers()
-         .then(heroes => this.answers = heroes)
+         .then(result => this.answers = result)
          .catch(error => this.error = error);
     }
 

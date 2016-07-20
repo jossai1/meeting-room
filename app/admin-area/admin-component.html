@@ -6,14 +6,14 @@
 <small class=" blue-grey-text" > select a date:   </small>
 
 <!-- <button (click)="getDates()" > Give me the dates  </button> -->
-<a class="waves-effect waves-light btn"  (click)="getDates()" > Give me the dates  </a>
+<!-- no need for buttons <a class="waves-effect waves-light btn"  (click)="getDates()" > Give me the dates  </a> -->
 
 <br><br>
 
 <small class=" blue-grey-text"> double click buttons to see updated changes:   </small>
   <!-- old style button without materialze <button *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </button> -->
 
-<a class="waves-effect waves-light btn" *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </a>
+<a class="waves-effect waves-light btn" *ngFor="let day of uniqDatesArr; let dateIndex = index" value="day" (click)="getTimes(dateIndex)"> {{uniqDatesArr[dateIndex]}} </a>
 
 
 <hr class="styled-hr" style="width:100%;">
@@ -25,7 +25,7 @@
 <br><br>
 
 <!-- <button (click)="tally()" > Tally   </button> -->
-<a class="waves-effect waves-light btn"  (click)="tally()" > Tally   </a>
+<!-- no need for tally button due to timers <a class="waves-effect waves-light btn"  (click)="tallySurveyAnswers()" > Tally   </a> -->
 
 <div class ="con">
   <div class="col">

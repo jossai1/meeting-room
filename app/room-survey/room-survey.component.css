@@ -6,3 +6,8 @@
   align-items: center;
   align-content: space-around;
 }
+
+
+.meeting-form img {
+    width: 75%;
+}
