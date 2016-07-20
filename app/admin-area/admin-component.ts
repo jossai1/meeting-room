@@ -31,11 +31,12 @@ export class AdminComponent implements OnInit
 
 
     constructor(private answerService: AnswerService,private questionService: QuestionService)
-    {}
+    {  this.answers = [] ;this.question.questionText = "loading...";}
 
 
     ngOnInit()
     {
+
         this.getAnswers();
     }
 
@@ -77,6 +78,7 @@ export class AdminComponent implements OnInit
       this.green = 0;
       this.amber = 0;
       this.red = 0;
+
       for(var i =0 ; i < this.results.length;i++)
       {
         if( this.results[i].response == 'green')
@@ -117,7 +119,9 @@ export class AdminComponent implements OnInit
          //set the question asked - by using the answers qid--- search by qid and get the questiontext
          else
          {
-           this.getAQuestion(this.results[0].questionID)
+          //console.log("hi ih ihih "+ this.results[0].questionID);
+            //this.question.questionText = this.results[0].questionID;
+           this.getAQuestion(this.results[this.results.length - 1 ].questionID);
          };
     }
 

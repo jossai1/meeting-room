@@ -28,6 +28,8 @@ var AdminComponent = (function () {
         this.green = 0;
         this.amber = 0;
         this.question = new question_1.Question(); //question that was asked //  question: Question;
+        this.answers = [];
+        this.question.questionText = "loading...";
     }
     AdminComponent.prototype.ngOnInit = function () {
         this.getAnswers();
@@ -89,7 +91,9 @@ var AdminComponent = (function () {
         if (this.results[0] == undefined) {
         }
         else {
-            this.getAQuestion(this.results[0].questionID);
+            //console.log("hi ih ihih "+ this.results[0].questionID);
+            //this.question.questionText = this.results[0].questionID;
+            this.getAQuestion(this.results[this.results.length - 1].questionID);
         }
         ;
     };

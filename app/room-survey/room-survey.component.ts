@@ -3,6 +3,7 @@ import { Question } from '../models/question'; //to display a question on the to
 import { QuestionService } from '../services/question.service';
 import { AnswerService } from '../services/answer.service';
 
+
 import 'rxjs/add/operator/toPromise';
 
 
@@ -26,7 +27,7 @@ export class RoomSurveyComponent implements OnInit
     AmberCount: number = 0;
     title = 'Room Survey';
     questions: Question[] =[];
-    theQuestion: Question;
+    theQuestion: Question = new Question();
 
     constructor(private questionService: QuestionService,private answerService: AnswerService)
     {
@@ -57,7 +58,8 @@ export class RoomSurveyComponent implements OnInit
 
     ngOnInit()
     {
-        // this.getAQuestion( "5784d21e69c702ad3b000002" );
+        //here you can load any question and the smileys will reference its id to log answers
+        this.getAQuestion( "578f58f68d0766a34f000393" );
         // this.getQuestions( );
 
       //need to laod question from db and display on top page
@@ -112,20 +114,20 @@ export class RoomSurveyComponent implements OnInit
         //  var tween = TweenLite.to(answer0, 1.5,{backgroundColor:"#48fb47"});
         // TweenLite.to(answer0, 1.5,ease:"Elastic.easeOut", {backgroundColor:"#48fb47"});
         //change id to whatever question you wnat to ask
-         this.logVote("578e4c1d8d0766a34f000001","green", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"green", this.getTime(),this.getDate());
        }
        else if (i == 1)
        {
          this.AmberCount++;
          console.log('AmberCount: ' +this.AmberCount + ' - ' +  this.getTime());
-         this.logVote("578e4c1d8d0766a34f000001","amber", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"amber", this.getTime(),this.getDate());
          //the questionid would come from this.quiestion.questionid,id o=roiy
        }
        else
        {
          this.RedCount++;
          console.log('Redcount:' + this.RedCount+ ' - ' +  this.getTime());
-         this.logVote("578e4c1d8d0766a34f000001","red", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"red", this.getTime(),this.getDate());
        }
 
 

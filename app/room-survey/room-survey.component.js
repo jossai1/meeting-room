@@ -9,6 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var question_1 = require('../models/question'); //to display a question on the top of the page
 var question_service_1 = require('../services/question.service');
 var answer_service_1 = require('../services/answer.service');
 require('rxjs/add/operator/toPromise');
@@ -22,6 +23,7 @@ var RoomSurveyComponent = (function () {
         this.AmberCount = 0;
         this.title = 'Room Survey';
         this.questions = [];
+        this.theQuestion = new question_1.Question();
         //an array of strings
         this.imageArray = [
             { link: 'app/assets/img/greenSmiley.png' },
@@ -44,7 +46,8 @@ var RoomSurveyComponent = (function () {
         this.title = this.questions[0].questionText;
     };
     RoomSurveyComponent.prototype.ngOnInit = function () {
-        // this.getAQuestion( "5784d21e69c702ad3b000002" );
+        //here you can load any question and the smileys will reference its id to log answers
+        this.getAQuestion("578f58f68d0766a34f000393");
         // this.getQuestions( );
         //need to laod question from db and display on top page
     };
@@ -91,17 +94,17 @@ var RoomSurveyComponent = (function () {
             //  var tween = TweenLite.to(answer0, 1.5,{backgroundColor:"#48fb47"});
             // TweenLite.to(answer0, 1.5,ease:"Elastic.easeOut", {backgroundColor:"#48fb47"});
             //change id to whatever question you wnat to ask
-            this.logVote("578e4c1d8d0766a34f000001", "green", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "green", this.getTime(), this.getDate());
         }
         else if (i == 1) {
             this.AmberCount++;
             console.log('AmberCount: ' + this.AmberCount + ' - ' + this.getTime());
-            this.logVote("578e4c1d8d0766a34f000001", "amber", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "amber", this.getTime(), this.getDate());
         }
         else {
             this.RedCount++;
             console.log('Redcount:' + this.RedCount + ' - ' + this.getTime());
-            this.logVote("578e4c1d8d0766a34f000001", "red", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "red", this.getTime(), this.getDate());
         }
     };
     RoomSurveyComponent = __decorate([
