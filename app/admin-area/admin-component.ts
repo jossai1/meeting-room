@@ -15,8 +15,9 @@ import 'rxjs/Rx';
 
 export class AdminComponent implements OnInit
 {
-    myTitle = 'Admin';
-    pick = 'pick a date and select a time';
+    myTitle = 'Survey Results';
+    pickDate = 'Pick a date ';
+    pickTime = '';
     error: any;
     answers: Answer[] =[];
     results: Answer[] =[];
@@ -27,6 +28,7 @@ export class AdminComponent implements OnInit
     red:number = 0;
     green:number=0;
     amber:number=0;
+    isClicked:boolean = false;
     question: Question = new Question(); //question that was asked //  question: Question;
 
 
@@ -110,7 +112,7 @@ export class AdminComponent implements OnInit
       var finalTime: string;
       console.log( this.uniqTimes[i] + this.selectedDate );
       finalTime = this.uniqTimes[i].split(":")[0] + ".0";
-      console.log(  finalTime);
+      console.log( finalTime );
       setTimeout(() => {
         this.answerService
            .finalQuery(this.selectedDate,parseFloat(finalTime))
@@ -119,6 +121,7 @@ export class AdminComponent implements OnInit
         setTimeout(() => {
           this.getAQuestion(this.results[this.results.length - 1 ].questionID);
           this.tallySurveyAnswers();
+          this.isClicked =true;
         }, 50);
       }, 100);
 
@@ -184,7 +187,9 @@ export class AdminComponent implements OnInit
            .catch(error=> this.error = error);
 
         setTimeout(() => {
+            this.pickTime = "What time was the meeting at ? ";
             this.processTimes();
+
         }, 50);
 
       }, 50);

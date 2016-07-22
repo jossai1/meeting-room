@@ -1,5 +1,5 @@
 <h1 class=" blue-grey-text" >{{ myTitle }}</h1>
-<h5 class=" blue-grey-text" >{{ pick }}</h5>
+<h5 class=" blue-grey-text" >{{ pickDate }}</h5>
 
 <br><br>
 
@@ -13,13 +13,16 @@
 <small class=" blue-grey-text"> double click buttons to see updated changes:   </small> -->
   <!-- old style button without materialze <button *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </button> -->
 
-<a class="waves-effect waves-light btn" *ngFor="let day of uniqDatesArr; let dateIndex = index" value="day" (click)="getTimes(dateIndex)"> {{uniqDatesArr[dateIndex]}} </a>
+<a class="waves-effect waves-light btn dates" *ngFor="let day of uniqDatesArr; let dateIndex = index" value="day" (click)="getTimes(dateIndex)"> {{uniqDatesArr[dateIndex]}} </a>
 
 
 <hr class="styled-hr" style="width:100%;">
 
+
+<h5 class=" blue-grey-text" >{{ pickTime }}</h5>
+
 <!-- <button *ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </button> -->
-<a class="waves-effect waves-light btn"*ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </a>
+<a class="waves-effect waves-light btn times"*ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </a>
 
 
 <br><br>
@@ -27,7 +30,7 @@
 <!-- <button (click)="tally()" > Tally   </button> -->
 <!-- no need for tally button due to timers <a class="waves-effect waves-light btn"  (click)="tallySurveyAnswers()" > Tally   </a> -->
 
-<div class ="con">
+<div class ="con" *ngIf="isClicked">
   <div class="col">
     <div class="col s12 m5">
       <div class="card-panel grey">

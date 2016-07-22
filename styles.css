@@ -1,9 +1,11 @@
 /* Master Styles */
 body {
-  margin: 2em;
   text-align: center;
 }
 
+h4 {
+      font-weight: 100;
+}
 
 /* everywhere else */
 /** {

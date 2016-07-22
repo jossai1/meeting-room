@@ -1,7 +1,9 @@
-<h1 class=" blue-grey-text">{{theQuestion.questionText}} </h1>
-<p class=" blue-grey-text" style="{font-weight:100} ">
+<h3 class=" blue-grey-text">{{theQuestion.questionText}} </h3>
+<br>
+<h4 class=" blue-grey-text" style="{font-weight:100} ">
 	Please tap how you feel
-</p>
+</h4>
+<br>
 <section class='form-wrapper'>
 	<div class='meeting-form' *ngFor="let img of imageArray; let i = index" >
 		<img [src]="img.link" [id]="'answer' + i" (click)="handleClicks(i)"/>

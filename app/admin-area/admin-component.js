@@ -17,8 +17,9 @@ var AdminComponent = (function () {
     function AdminComponent(answerService, questionService) {
         this.answerService = answerService;
         this.questionService = questionService;
-        this.myTitle = 'Admin';
-        this.pick = 'pick a date and select a time';
+        this.myTitle = 'Survey Results';
+        this.pickDate = 'Pick a date ';
+        this.pickTime = '';
         this.answers = [];
         this.results = [];
         this.uniqDatesArr = [];
@@ -27,6 +28,7 @@ var AdminComponent = (function () {
         this.red = 0;
         this.green = 0;
         this.amber = 0;
+        this.isClicked = false;
         this.question = new question_1.Question(); //question that was asked //  question: Question;
         this.answers = [];
         this.question.questionText = "loading...";
@@ -99,6 +101,7 @@ var AdminComponent = (function () {
             setTimeout(function () {
                 _this.getAQuestion(_this.results[_this.results.length - 1].questionID);
                 _this.tallySurveyAnswers();
+                _this.isClicked = true;
             }, 50);
         }, 100);
         // var finalTime: string;
@@ -147,6 +150,7 @@ var AdminComponent = (function () {
                 .then(function (filtered) { return _this.answersTime = filtered; })
                 .catch(function (error) { return _this.error = error; });
             setTimeout(function () {
+                _this.pickTime = "What time was the meeting at ? ";
                 _this.processTimes();
             }, 50);
         }, 50);

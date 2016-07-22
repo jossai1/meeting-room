@@ -2,6 +2,7 @@
 select
 {
     width:200px;
+
 }
 
 h5
@@ -11,7 +12,12 @@ h5
 
 .card-panel
 {
-  text-align: center;
+    margin-right: 30px;
+}
+
+.dates,
+.times {
+  margin: 1%;
 }
 
 P
@@ -23,4 +29,8 @@ P
 hr.styled-hr
 {
     background-color: #d0d0d0;;
+}
+
+.con{
+  display: inline-flex;
 }
