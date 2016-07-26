@@ -5,7 +5,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     selector: 'my-app',
     template: `
     <nav>
-    <div class="nav-wrapper">
+    <div class="nav-wrapper blue  lighten-2">
       <ul class="">
         <li><a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a></li>
         <li><a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a></li>
