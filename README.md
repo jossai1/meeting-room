@@ -1,2 +1,3 @@
 # MeetingsProject
-Repo for meetings project
+* this is my DEV BRANCH 
+* Repo for meetings project
