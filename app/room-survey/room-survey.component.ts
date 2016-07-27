@@ -59,10 +59,10 @@ export class RoomSurveyComponent implements OnInit
     ngOnInit()
     {
         //here you can load any question and the smileys will reference its id to log answers
-        this.getAQuestion( "578f58f68d0766a34f000393" );
-        // this.getQuestions( );
-
-      //need to laod question from db and display on top page
+        // use for pre-prod only this.getAQuestion( "578f58f68d0766a34f000393" );
+        
+        //use this id for production for db on ssh 
+        this.getAQuestion( "5798ba641879ebea6e00000c" );
     }
 
      procString(hour:string,min:string)
