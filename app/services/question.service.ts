@@ -12,7 +12,7 @@ export class QuestionService
 {
   // private questionUrl = 'http://localhost:8080/api/questions';
   // private theQuestionUrl = 'http://localhost:8080/api/get-q';  // URL to web api
-   private questionUrl = 'http://localhost:8095/api/questions';
+   private questionUrl = 'https://api.mlab.com/api/1/databases/surveydb/collections/questions?apiKey=s3TIgY0vOMj9aVoeNN_LCr3K_QNwCRQD';
   private theQuestionUrl = 'http://localhost:8095/api/get-q';  // URL to web api
 
   constructor(private http: Http) {}
