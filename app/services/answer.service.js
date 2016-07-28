@@ -14,9 +14,12 @@ require('rxjs/add/operator/toPromise');
 var AnswerService = (function () {
     function AnswerService(http) {
         this.http = http;
-        this.answersUrl = 'http://localhost:8080/api/answers'; // URL to web api
-        this.datesQuery = 'http://localhost:8080/api/query-ans';
-        this.finalQueryUrl = 'http://localhost:8080/api/final-query';
+        // private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
+        // private datesQuery = 'http://localhost:8080/api/query-ans';
+        // private finalQueryUrl = 'http://localhost:8080/api/final-query';
+        this.answersUrl = 'http://172.20.32.38:8095/api/answers'; // URL to web api
+        this.datesQuery = 'http://172.20.32.38:8095/api/query-ans';
+        this.finalQueryUrl = 'http://172.20.32.38:8095/api/final-query';
     }
     AnswerService.prototype.getAnswers = function () {
         return this.http.get(this.answersUrl)
