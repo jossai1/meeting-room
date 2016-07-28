@@ -8,12 +8,14 @@ import { Answer } from '../models/answer';
 
 @Injectable()
 export class AnswerService {
-// private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
-// private datesQuery = 'http://localhost:8080/api/query-ans';
-// private finalQueryUrl = 'http://localhost:8080/api/final-query';
-private answersUrl = 'http://172.20.32.38:8095/api/answers';  // URL to web api
-private datesQuery = 'http://172.20.32.38:8095/api/query-ans';
-private finalQueryUrl = 'http://172.20.32.38:8095/api/final-query';
+private answersUrl = 'http://localhost:8080/api/answers';  // URL to web api
+private datesQuery = 'http://localhost:8080/api/query-ans';
+private finalQueryUrl = 'http://localhost:8080/api/final-query';
+
+//for production
+// private answersUrl = 'http://172.20.32.38:8095/api/answers';  // URL to web api
+// private datesQuery = 'http://172.20.32.38:8095/api/query-ans';
+// private finalQueryUrl = 'http://172.20.32.38:8095/api/final-query';
 
 constructor(private http: Http) { }
 

@@ -12,6 +12,10 @@ var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/toPromise');
 var AnswerService = (function () {
+    //for production
+    // private answersUrl = 'http://172.20.32.38:8095/api/answers';  // URL to web api
+    // private datesQuery = 'http://172.20.32.38:8095/api/query-ans';
+    // private finalQueryUrl = 'http://172.20.32.38:8095/api/final-query';
     function AnswerService(http) {
         this.http = http;
         this.answersUrl = 'http://localhost:8080/api/answers'; // URL to web api

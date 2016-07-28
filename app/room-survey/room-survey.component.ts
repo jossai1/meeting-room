@@ -3,9 +3,7 @@ import { Question } from '../models/question'; //to display a question on the to
 import { QuestionService } from '../services/question.service';
 import { AnswerService } from '../services/answer.service';
 
-
 import 'rxjs/add/operator/toPromise';
-
 
 
 interface imageArray {
@@ -59,10 +57,10 @@ export class RoomSurveyComponent implements OnInit
     ngOnInit()
     {
         //here you can load any question and the smileys will reference its id to log answers
-        // use for pre-prod only this.getAQuestion( "578f58f68d0766a34f000393" );
-        
-        //use this id for production for db on ssh 
-        this.getAQuestion( "5798ba641879ebea6e00000c" );
+        // use for dev only
+        this.getAQuestion( "578f58f68d0766a34f000393" );
+        //use this id for production for db on ssh
+        //this.getAQuestion( "5798ba641879ebea6e00000c" );
     }
 
      procString(hour:string,min:string)
@@ -104,16 +102,15 @@ export class RoomSurveyComponent implements OnInit
  }
 
       //log clicks
-    handleClicks(i:number )
+    handleClicks(i:number,event:any  )
     {
+      event.preventDefault();
+      event.stopPropagation();
+
        if(i == 0)
        {
          this.GreenCount++;
          console.log('GreenCount: '+ this.GreenCount + ' - ' +  this.getTime());
-        //  var photo = document.getElementById("answer0"); //or use jQuery's $("#photo")
-        //  var tween = TweenLite.to(answer0, 1.5,{backgroundColor:"#48fb47"});
-        // TweenLite.to(answer0, 1.5,ease:"Elastic.easeOut", {backgroundColor:"#48fb47"});
-        //change id to whatever question you wnat to ask
          this.logVote(this.theQuestion._id,"green", this.getTime(),this.getDate());
        }
        else if (i == 1)
@@ -123,18 +120,16 @@ export class RoomSurveyComponent implements OnInit
          this.logVote(this.theQuestion._id,"amber", this.getTime(),this.getDate());
          //the questionid would come from this.quiestion.questionid,id o=roiy
        }
-       else
+       else if(i == 2 )
        {
          this.RedCount++;
          console.log('Redcount:' + this.RedCount+ ' - ' +  this.getTime());
          this.logVote(this.theQuestion._id,"red", this.getTime(),this.getDate());
        }
+       else{
 
-
-
-
+       }
 
  }
-//all thats  left to do here is logging votes - set up srevices first - serveisce done , url ? /db not active so errors occur
-//and then dispalying a question from the db - using question service
+
 }

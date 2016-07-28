@@ -47,9 +47,10 @@ var RoomSurveyComponent = (function () {
     };
     RoomSurveyComponent.prototype.ngOnInit = function () {
         //here you can load any question and the smileys will reference its id to log answers
+        // use for dev only
         this.getAQuestion("578f58f68d0766a34f000393");
-        // this.getQuestions( );
-        //need to laod question from db and display on top page
+        //use this id for production for db on ssh
+        //this.getAQuestion( "5798ba641879ebea6e00000c" );
     };
     RoomSurveyComponent.prototype.procString = function (hour, min) {
         if (hour.toString().length == 1) {
@@ -86,14 +87,12 @@ var RoomSurveyComponent = (function () {
             .then(function (error) { return _this.error = error; });
     };
     //log clicks
-    RoomSurveyComponent.prototype.handleClicks = function (i) {
+    RoomSurveyComponent.prototype.handleClicks = function (i, event) {
+        event.preventDefault();
+        event.stopPropagation();
         if (i == 0) {
             this.GreenCount++;
             console.log('GreenCount: ' + this.GreenCount + ' - ' + this.getTime());
-            //  var photo = document.getElementById("answer0"); //or use jQuery's $("#photo")
-            //  var tween = TweenLite.to(answer0, 1.5,{backgroundColor:"#48fb47"});
-            // TweenLite.to(answer0, 1.5,ease:"Elastic.easeOut", {backgroundColor:"#48fb47"});
-            //change id to whatever question you wnat to ask
             this.logVote(this.theQuestion._id, "green", this.getTime(), this.getDate());
         }
         else if (i == 1) {
@@ -101,10 +100,12 @@ var RoomSurveyComponent = (function () {
             console.log('AmberCount: ' + this.AmberCount + ' - ' + this.getTime());
             this.logVote(this.theQuestion._id, "amber", this.getTime(), this.getDate());
         }
-        else {
+        else if (i == 2) {
             this.RedCount++;
             console.log('Redcount:' + this.RedCount + ' - ' + this.getTime());
             this.logVote(this.theQuestion._id, "red", this.getTime(), this.getDate());
+        }
+        else {
         }
     };
     RoomSurveyComponent = __decorate([
