@@ -59,7 +59,9 @@ export class RoomSurveyComponent implements OnInit
 
     ngOnInit()
     {
-        this.getAQuestion( "578f58f68d0766a34f000393" );
+
+        //for production - set question to the question you want to ask
+        /*change this to the id of whatever question you make in the new db called productionDB*/this.getAQuestion( "578f58f68d0766a34f000393" );
         var roomName = this.sharedService.getRoomName();
 
         if(roomName == '' )
