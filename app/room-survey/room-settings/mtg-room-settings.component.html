@@ -1,0 +1,13 @@
+<h1>Set Meeting Room</h1>
+<h4> Select the meeting room you are in </h4>
+
+<div class = "container">
+<a class="waves-effect waves-light btn rooms" *ngFor="let room of mtgRooms; let roomIndex = index" [id]="'room' + roomIndex" value="day" (click)= "set(roomIndex)"> {{room}} </a>
+</div>
+
+<br>
+
+  <input class= "field" type="text"  placeholder="Other"  [(ngModel)]= "mtgRoom">
+  <br>
+  <input class="subBtn" type="submit" value="Submit" (click) = "submit()">
+<!-- (click)="getTimes(dateIndex) -->

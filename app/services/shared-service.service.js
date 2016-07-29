@@ -9,20 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var router_1 = require('@angular/router');
-var AppComponent = (function () {
-    function AppComponent() {
-        this.title = 'we want better meetings!';
+var SharedService = (function () {
+    function SharedService() {
+        //set to blank 
+        this.room = '';
     }
-    AppComponent = __decorate([
-        core_1.Component({
-            selector: 'my-app',
-            template: "\n    <nav>\n    <div class=\"nav-wrapper blue  lighten-2\">\n      <ul class=\"\">\n        <li><a [routerLink]=\"['/room-survey']\" routerLinkActive=\"active\">Survey</a></li>\n        <li><a [routerLink]=\"['/settings-area']\" routerLinkActive=\"active\">Settings</a></li>\n      </ul>\n    </div>\n  </nav>\n    <router-outlet></router-outlet>",
-            directives: [router_1.ROUTER_DIRECTIVES]
-        }), 
+    SharedService.prototype.set = function (roomName) {
+        this.room = roomName;
+    };
+    SharedService.prototype.getRoomName = function () {
+        return this.room;
+    };
+    SharedService = __decorate([
+        core_1.Injectable(), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], SharedService);
+    return SharedService;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.SharedService = SharedService;
+//# sourceMappingURL=shared-service.service.js.map

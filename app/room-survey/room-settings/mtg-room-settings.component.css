@@ -1,0 +1,16 @@
+
+ .rooms {
+  margin: 1%;
+}
+
+.container{
+  flex-direction: column;
+}
+
+.field{
+  width: 15%
+}
+
+.subBtn{
+  width: 10%
+}

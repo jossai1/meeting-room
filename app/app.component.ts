@@ -8,7 +8,7 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
     <div class="nav-wrapper blue  lighten-2">
       <ul class="">
         <li><a [routerLink]="['/room-survey']" routerLinkActive="active">Survey</a></li>
-        <li><a [routerLink]="['/admin-area']" routerLinkActive="active">Admin</a></li>
+        <li><a [routerLink]="['/settings-area']" routerLinkActive="active">Settings</a></li>
       </ul>
     </div>
   </nav>

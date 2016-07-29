@@ -32,9 +32,9 @@ getAnswers(): Promise<Answer[]> {
   return body.data || { };
 }
 
-  logVote(questionID:string, response:string, time:number, date:string): Promise<Answer[]> {
+  logVote(questionID:string, response:string, time:number, date:string, mtgRoom:string): Promise<Answer[]> {
     console.log('in here yass');
-    let body = JSON.stringify({ questionID ,response,time ,date});
+    let body = JSON.stringify({ questionID ,response,time ,date, mtgRoom});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.answersUrl, body, options)

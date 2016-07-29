@@ -12,11 +12,13 @@ var core_1 = require('@angular/core');
 var question_1 = require('../models/question'); //to display a question on the top of the page
 var question_service_1 = require('../services/question.service');
 var answer_service_1 = require('../services/answer.service');
+var shared_service_service_1 = require('../services/shared-service.service');
 require('rxjs/add/operator/toPromise');
 var RoomSurveyComponent = (function () {
-    function RoomSurveyComponent(questionService, answerService) {
+    function RoomSurveyComponent(questionService, answerService, sharedService) {
         this.questionService = questionService;
         this.answerService = answerService;
+        this.sharedService = sharedService;
         this.imageArray = [];
         this.GreenCount = 0;
         this.RedCount = 0;
@@ -46,11 +48,17 @@ var RoomSurveyComponent = (function () {
         this.title = this.questions[0].questionText;
     };
     RoomSurveyComponent.prototype.ngOnInit = function () {
-        //here you can load any question and the smileys will reference its id to log answers
-        // use for dev only
         this.getAQuestion("578f58f68d0766a34f000393");
-        //use this id for production for db on ssh
-        //this.getAQuestion( "5798ba641879ebea6e00000c" );
+        var roomName = this.sharedService.getRoomName();
+        if (roomName == '') {
+            console.log('room name not set yet ');
+            alert("please set the room!");
+        }
+        else {
+            this.mtgRoom = roomName;
+            console.log('set to: ' + roomName);
+        }
+        // this.mtgRoom = this.sharedService.getRoomName();
     };
     RoomSurveyComponent.prototype.procString = function (hour, min) {
         if (hour.toString().length == 1) {
@@ -77,13 +85,13 @@ var RoomSurveyComponent = (function () {
         return currentTime;
     };
     //add a vote/ckick to the database
-    RoomSurveyComponent.prototype.logVote = function (questionID, response, time, date) {
+    RoomSurveyComponent.prototype.logVote = function (questionID, response, time, date, mtgRoom) {
         var _this = this;
         if (!response) {
             return;
         }
         console.log('done');
-        this.answerService.logVote(questionID, response, time, date)
+        this.answerService.logVote(questionID, response, time, date, mtgRoom)
             .then(function (error) { return _this.error = error; });
     };
     //log clicks
@@ -93,17 +101,17 @@ var RoomSurveyComponent = (function () {
         if (i == 0) {
             this.GreenCount++;
             console.log('GreenCount: ' + this.GreenCount + ' - ' + this.getTime());
-            this.logVote(this.theQuestion._id, "green", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "green", this.getTime(), this.getDate(), this.mtgRoom);
         }
         else if (i == 1) {
             this.AmberCount++;
             console.log('AmberCount: ' + this.AmberCount + ' - ' + this.getTime());
-            this.logVote(this.theQuestion._id, "amber", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "amber", this.getTime(), this.getDate(), this.mtgRoom);
         }
         else if (i == 2) {
             this.RedCount++;
             console.log('Redcount:' + this.RedCount + ' - ' + this.getTime());
-            this.logVote(this.theQuestion._id, "red", this.getTime(), this.getDate());
+            this.logVote(this.theQuestion._id, "red", this.getTime(), this.getDate(), this.mtgRoom);
         }
         else {
         }
@@ -115,7 +123,7 @@ var RoomSurveyComponent = (function () {
             styleUrls: ['app/room-survey/room-survey.component.css'],
             providers: [question_service_1.QuestionService, answer_service_1.AnswerService]
         }), 
-        __metadata('design:paramtypes', [question_service_1.QuestionService, answer_service_1.AnswerService])
+        __metadata('design:paramtypes', [question_service_1.QuestionService, answer_service_1.AnswerService, shared_service_service_1.SharedService])
     ], RoomSurveyComponent);
     return RoomSurveyComponent;
 }());

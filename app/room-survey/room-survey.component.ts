@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Question } from '../models/question'; //to display a question on the top of the page
 import { QuestionService } from '../services/question.service';
 import { AnswerService } from '../services/answer.service';
+import { SharedService } from '../services/shared-service.service';
+
 
 import 'rxjs/add/operator/toPromise';
 
@@ -26,8 +28,9 @@ export class RoomSurveyComponent implements OnInit
     title = 'Room Survey';
     questions: Question[] =[];
     theQuestion: Question = new Question();
+    mtgRoom:string;
 
-    constructor(private questionService: QuestionService,private answerService: AnswerService)
+    constructor(private questionService: QuestionService,private answerService: AnswerService,private sharedService:SharedService)
     {
         //an array of strings
         this.imageArray = [
@@ -36,7 +39,7 @@ export class RoomSurveyComponent implements OnInit
           {link: 'app/assets/img/redSmiley.png'}];
     }
 
-    getAQuestion( q_id:string )
+    getAQuestion( q_id: string )
     {
       this.questionService
          .getAQuestion(q_id)
@@ -56,11 +59,33 @@ export class RoomSurveyComponent implements OnInit
 
     ngOnInit()
     {
-        //here you can load any question and the smileys will reference its id to log answers
-        // use for dev only
         this.getAQuestion( "578f58f68d0766a34f000393" );
-        //use this id for production for db on ssh
-        //this.getAQuestion( "5798ba641879ebea6e00000c" );
+        var roomName = this.sharedService.getRoomName();
+
+        if(roomName == '' )
+        {
+            console.log('room name not set yet ');
+
+            alert("please set the room!");
+
+            //will redirect to settings page
+              // if (confirm)
+              // {
+              //   window.location.replace('http://localhost:3000/settings-area');
+              // }
+              // else
+              // {
+              //     alert('Why did you press cancel? You should have confirmed');
+              // }
+
+        }
+        else
+        {
+          this.mtgRoom = roomName ;
+          console.log('set to: ' +  roomName);
+        }
+        // this.mtgRoom = this.sharedService.getRoomName();
+
     }
 
      procString(hour:string,min:string)
@@ -94,10 +119,10 @@ export class RoomSurveyComponent implements OnInit
        }
 
       //add a vote/ckick to the database
-     logVote ( questionID:string, response:string, time:number,date:string ) {
+     logVote ( questionID:string, response:string, time:number,date:string, mtgRoom:string ) {
        if (!response) { return; }
        console.log('done');
-       this.answerService.logVote(questionID,response,time,date)
+       this.answerService.logVote(questionID,response,time,date,mtgRoom)
                         .then((error:any) =>  this.error = <any>error);
  }
 
@@ -111,20 +136,20 @@ export class RoomSurveyComponent implements OnInit
        {
          this.GreenCount++;
          console.log('GreenCount: '+ this.GreenCount + ' - ' +  this.getTime());
-         this.logVote(this.theQuestion._id,"green", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"green", this.getTime(),this.getDate(),this.mtgRoom);
        }
        else if (i == 1)
        {
          this.AmberCount++;
          console.log('AmberCount: ' +this.AmberCount + ' - ' +  this.getTime());
-         this.logVote(this.theQuestion._id,"amber", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"amber", this.getTime(),this.getDate(),this.mtgRoom);
          //the questionid would come from this.quiestion.questionid,id o=roiy
        }
        else if(i == 2 )
        {
          this.RedCount++;
          console.log('Redcount:' + this.RedCount+ ' - ' +  this.getTime());
-         this.logVote(this.theQuestion._id,"red", this.getTime(),this.getDate());
+         this.logVote(this.theQuestion._id,"red", this.getTime(),this.getDate(),this.mtgRoom);
        }
        else{
 

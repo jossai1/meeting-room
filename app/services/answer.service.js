@@ -32,9 +32,9 @@ var AnswerService = (function () {
         var body = res.json();
         return body.data || {};
     };
-    AnswerService.prototype.logVote = function (questionID, response, time, date) {
+    AnswerService.prototype.logVote = function (questionID, response, time, date, mtgRoom) {
         console.log('in here yass');
-        var body = JSON.stringify({ questionID: questionID, response: response, time: time, date: date });
+        var body = JSON.stringify({ questionID: questionID, response: response, time: time, date: date, mtgRoom: mtgRoom });
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.answersUrl, body, options)

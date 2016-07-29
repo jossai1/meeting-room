@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit
           setTimeout(() => {
             this.getDates();
           }, 50);
-        }, 100);
+        }, 90);
 
     }
 

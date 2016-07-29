@@ -40,7 +40,7 @@ var AdminComponent = (function () {
             setTimeout(function () {
                 _this.getDates();
             }, 50);
-        }, 100);
+        }, 90);
     };
     AdminComponent.prototype.getAQuestion = function (q_id) {
         var _this = this;
