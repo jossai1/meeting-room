@@ -14,7 +14,7 @@ import { SharedService } from '../../services/shared-service.service';
 
 export class MeetingSettings implements OnInit{
 
-  mtgRooms: Array<string> = [ 'Albert','Boardroom','Brooklyn','Grosvenor','Hammersmith' ,'Helix' , 'Mathematica', 'Millau', 'Millenium','Sydney','Westminister'];
+  mtgRooms: Array<string> = [ 'Albert','Boardroom','Brooklyn','Grosvenor','Hammersmith' ,'Helix' , 'Mathematical', 'Millau', 'Millenium','Sydney','Westminister'];
   //mtgRooms: Array<Object> = [{name: 'Albert'}, {name:'Boardroom'} ,{name:'Brooklyn'} ,{name:'Grosvenor'} ,{name:'Hammersmith'} ,{name:'Helix' },{name: 'Mathematica'}, {name: 'Millau'}, {name:'Millenium' },{name:'Sydney'} ,{name:'Westminister'}];
   mtgRoom:string;
   constructor(private sharedService: SharedService)
