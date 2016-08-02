@@ -18,9 +18,9 @@ var AnswerService = (function () {
         // private datesQuery = 'http://localhost:8080/api/query-ans';
         // private finalQueryUrl = 'http://localhost:8080/api/final-query';
         //for production
-        this.answersUrl = 'http://172.20.32.38:8095/api/answers'; // URL to web api
-        this.datesQuery = 'http://172.20.32.38:8095/api/query-ans';
-        this.finalQueryUrl = 'http://172.20.32.38:8095/api/final-query';
+        this.answersUrl = 'http://172.20.32.38:8096/api/answers'; // URL to web api
+        this.datesQuery = 'http://172.20.32.38:8096/api/query-ans';
+        this.finalQueryUrl = 'http://172.20.32.38:8096/api/final-query';
     }
     AnswerService.prototype.getAnswers = function () {
         return this.http.get(this.answersUrl)

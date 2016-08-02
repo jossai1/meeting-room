@@ -17,8 +17,8 @@ var QuestionService = (function () {
         // private questionUrl = 'http://localhost:8080/api/questions';
         // private theQuestionUrl = 'http://localhost:8080/api/get-q';  // URL to web api
         //for production
-        this.questionUrl = 'http://172.20.32.38:8095/api/questions';
-        this.theQuestionUrl = 'http://172.20.32.38:8095/api/get-q'; // URL to web api
+        this.questionUrl = 'http://172.20.32.38:8096/api/questions';
+        this.theQuestionUrl = 'http://172.20.32.38:8096/api/get-q'; // URL to web api
     }
     QuestionService.prototype.getQuestions = function () {
         return this.http.get(this.questionUrl)

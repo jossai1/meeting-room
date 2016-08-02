@@ -49,7 +49,7 @@ var RoomSurveyComponent = (function () {
     };
     RoomSurveyComponent.prototype.ngOnInit = function () {
         //for production - set question to the question you want to ask
-        /*change this to the id of whatever question you make in the new db called productionDB*/ this.getAQuestion("578f58f68d0766a34f000393");
+        /*for pre-PROD ONLY */ this.getAQuestion("579b4769c0c58047a7ceaf1d");
         var roomName = this.sharedService.getRoomName();
         if (roomName == '') {
             console.log('room name not set yet ');
