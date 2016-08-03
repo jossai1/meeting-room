@@ -14,7 +14,7 @@ export class QuestionService
   // private theQuestionUrl = 'http://localhost:8080/api/get-q';  // URL to web api
 
 
-  //for production
+  /*for production*/
   private questionUrl = 'http://172.20.32.38:8095/api/questions';
   private theQuestionUrl = 'http://172.20.32.38:8095/api/get-q';  // URL to web api
 
