@@ -14,7 +14,7 @@ var shared_service_service_1 = require('../../services/shared-service.service');
 var MeetingSettings = (function () {
     function MeetingSettings(sharedService) {
         this.sharedService = sharedService;
-        this.mtgRooms = ['Albert', 'Boardroom', 'Brooklyn', 'Grosvenor', 'Hammersmith', 'Helix', 'Mathematica', 'Millau', 'Millenium', 'Sydney', 'Westminister'];
+        this.mtgRooms = ['Albert', 'Boardroom', 'Brooklyn', 'Grosvenor', 'Hammersmith', 'Helix', 'Mathematical', 'Millau', 'Millenium', 'Sydney', 'Westminister'];
     }
     MeetingSettings.prototype.ngOnInit = function () {
     };
