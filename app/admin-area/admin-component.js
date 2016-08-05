@@ -39,8 +39,8 @@ var AdminComponent = (function () {
             _this.getAnswers();
             setTimeout(function () {
                 _this.getDates();
-            }, 50);
-        }, 90);
+            }, 500); //changed to 1000 :) lol
+        }, 1000);
     };
     AdminComponent.prototype.getAQuestion = function (q_id) {
         var _this = this;
