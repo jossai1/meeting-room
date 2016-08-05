@@ -38,12 +38,13 @@ export class AdminComponent implements OnInit
 
     ngOnInit()
     {
+      setTimeout(() => {
+        this.getAnswers();
         setTimeout(() => {
-          this.getAnswers();
-          setTimeout(() => {
-            this.getDates();
-          }, 50);
-        }, 90);
+          this.getDates();
+        }, 500); //changed to 1000 :) lol
+      }, 1000);
+
 
     }
 
