@@ -31,6 +31,25 @@
 <!-- no need for tally button due to timers <a class="waves-effect waves-light btn"  (click)="tallySurveyAnswers()" > Tally   </a> -->
 
 <div class ="con" *ngIf="isClicked">
+  <div class="row">
+
+    <div class="col s4">
+
+      <i style="color: #64b5f6;"class="large material-icons">room</i>
+      <ul>
+      <li *ngFor= "let room of uniqRoomsArr"> {{room}}</li>
+      </ul>
+      <!-- Promo Content 1 goes here -->
+    </div>
+    <div class="col s4">
+      <!-- Promo Content 2 goes here -->
+    </div>
+    <div class="col s4">
+      <!-- Promo Content 3 goes here -->
+    </div>
+
+  </div>
+
   <div class="col">
     <div class="col s12 m5">
       <div class="card-panel grey">
@@ -60,7 +79,7 @@
     </div>
   </div>
 </div>
-
+<br>
 <!--IF LINK IS CLIECKED - LOAD ADVANCED SEARCH   -->
 <a (click)= "loadAS = true"> Advanced Query</a>
 <advanced-query *ngIf="loadAS">
