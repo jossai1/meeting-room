@@ -16,6 +16,8 @@ export class AnswerService {
 private answersUrl = 'http://172.20.32.38:8096/api/answers';  // URL to web api
 private datesQuery = 'http://172.20.32.38:8096/api/query-ans';
 private finalQueryUrl = 'http://172.20.32.38:8096/api/final-query';
+private advancedQueryUrl = 'http://172.20.32.38:8096/api/advanced-query';
+
 
 constructor(private http: Http) { }
 
@@ -67,6 +69,18 @@ getAnswers(): Promise<Answer[]> {
                     .then(response => response.json())
                     .catch(this.handleError);
         }
+
+        
+        advancedQuery(date:string,endTime:number,startTime:number,mtgRoom:string ): Promise<Answer[]> {
+                console.log('hey! doing an advanced query here :)');
+                   let body = JSON.stringify({date,startTime,endTime,mtgRoom});
+                   let headers = new Headers({ 'Content-Type': 'application/json' });
+                   let options = new RequestOptions({ headers: headers });
+                   return this.http.post(this.advancedQueryUrl, body, options)
+                              .toPromise() //chnaged to the res.json instaed of extract data
+                              .then(response => response.json())
+                              .catch(this.handleError);
+                  }
 
   private handleError(error: any) {
      console.error('An error occurred', error);

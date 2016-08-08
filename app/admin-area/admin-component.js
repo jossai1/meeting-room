@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
 var question_service_1 = require('../services/question.service');
 var question_1 = require('../models/question');
+var advanced_query_component_1 = require('./advanced-query/advanced-query.component');
 require('rxjs/Rx');
 var AdminComponent = (function () {
     function AdminComponent(answerService, questionService) {
@@ -23,12 +24,14 @@ var AdminComponent = (function () {
         this.answers = [];
         this.results = [];
         this.uniqDatesArr = [];
+        this.uniqRoomsArr = [];
         this.answersTime = [];
         this.uniqTimes = [];
         this.red = 0;
         this.green = 0;
         this.amber = 0;
         this.isClicked = false;
+        this.loadAS = false;
         this.question = new question_1.Question(); //question that was asked //  question: Question;
         this.answers = [];
         this.question.questionText = "loading...";
@@ -82,6 +85,15 @@ var AdminComponent = (function () {
             }
             else { }
         }
+        //for me to see rooms
+        for (var i = 0; i < this.results.length; i++) {
+            //if(results[i].mtgRoom != undefined )
+            console.log(this.results[i].mtgRoom);
+            this.uniqRoomsArr[i] = this.results[i].mtgRoom;
+        }
+        //for displaying rooms
+        this.uniqRoomsArr = Array.from(new Set(this.uniqRoomsArr)); //remove dupliacte rooms
+        this.uniqRoomsArr = this.uniqRoomsArr.filter(function (n) { return n != undefined; }); //remove any undefined rooms
     };
     //TODO: change method name
     //method invoke by clicking a time button - this concludes tyhe selecting phase - time and date have been selected
@@ -175,7 +187,8 @@ var AdminComponent = (function () {
             selector: 'admin-area',
             templateUrl: 'app/admin-area/admin-component.html',
             styleUrls: ['app/admin-area/admin-component.css'],
-            providers: [answer_service_1.AnswerService, question_service_1.QuestionService]
+            providers: [answer_service_1.AnswerService, question_service_1.QuestionService],
+            directives: [advanced_query_component_1.AdvancedQueryComponent]
         }), 
         __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService])
     ], AdminComponent);

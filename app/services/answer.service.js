@@ -21,6 +21,7 @@ var AnswerService = (function () {
         this.answersUrl = 'http://172.20.32.38:8096/api/answers'; // URL to web api
         this.datesQuery = 'http://172.20.32.38:8096/api/query-ans';
         this.finalQueryUrl = 'http://172.20.32.38:8096/api/final-query';
+        this.advancedQueryUrl = 'http://172.20.32.38:8096/api/advanced-query';
     }
     AnswerService.prototype.getAnswers = function () {
         return this.http.get(this.answersUrl)
@@ -58,6 +59,16 @@ var AnswerService = (function () {
         var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
         var options = new http_1.RequestOptions({ headers: headers });
         return this.http.post(this.finalQueryUrl, body, options)
+            .toPromise() //chnaged to the res.json instaed of extract data
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
+    AnswerService.prototype.advancedQuery = function (date, endTime, startTime, mtgRoom) {
+        console.log('hey! doing an advanced query here :)');
+        var body = JSON.stringify({ date: date, startTime: startTime, endTime: endTime, mtgRoom: mtgRoom });
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.advancedQueryUrl, body, options)
             .toPromise() //chnaged to the res.json instaed of extract data
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
