@@ -48,8 +48,8 @@ var RoomSurveyComponent = (function () {
         this.title = this.questions[0].questionText;
     };
     RoomSurveyComponent.prototype.ngOnInit = function () {
-        //for production - set question to the question you want to ask
-        /*for pre-PROD ONLY */ this.getAQuestion("579b4769c0c58047a7ceaf1d");
+        //PROD DB QUESTION ID FOR QUETION - HOW WAS THE MEETING? 
+        /*PROD ONLY */ this.getAQuestion("57a0cb8a7ca31592a8f66d28");
         var roomName = this.sharedService.getRoomName();
         if (roomName == '') {
             console.log('room name not set yet ');
