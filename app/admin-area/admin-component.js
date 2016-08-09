@@ -85,13 +85,15 @@ var AdminComponent = (function () {
             }
             else { }
         }
+        //for me to see rooms
         for (var i = 0; i < this.results.length; i++) {
             //if(results[i].mtgRoom != undefined )
             console.log(this.results[i].mtgRoom);
             this.uniqRoomsArr[i] = this.results[i].mtgRoom;
         }
-        this.uniqRoomsArr = Array.from(new Set(this.uniqRoomsArr));
-        this.uniqRoomsArr = this.uniqRoomsArr.filter(function (n) { return n != undefined; });
+        //for displaying rooms
+        this.uniqRoomsArr = Array.from(new Set(this.uniqRoomsArr)); //remove dupliacte rooms
+        this.uniqRoomsArr = this.uniqRoomsArr.filter(function (n) { return n != undefined; }); //remove any undefined rooms
     };
     //TODO: change method name
     //method invoke by clicking a time button - this concludes tyhe selecting phase - time and date have been selected

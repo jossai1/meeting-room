@@ -5,7 +5,6 @@ import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { AdvancedQueryComponent } from './advanced-query/advanced-query.component';
 
-
 import 'rxjs/Rx';
 
 
@@ -107,6 +106,7 @@ export class AdminComponent implements OnInit
         else{}
       }
 
+//for me to see rooms
     for(var i =0 ; i < this.results.length;i++)
       {
           //if(results[i].mtgRoom != undefined )
@@ -114,8 +114,9 @@ export class AdminComponent implements OnInit
           this.uniqRoomsArr[i] = this.results[i].mtgRoom;
       }
 
-      this.uniqRoomsArr =  Array.from(new Set(this.uniqRoomsArr));
-      this.uniqRoomsArr = this.uniqRoomsArr.filter(function(n){ return n != undefined });
+//for displaying rooms
+      this.uniqRoomsArr =  Array.from(new Set(this.uniqRoomsArr));//remove dupliacte rooms
+      this.uniqRoomsArr = this.uniqRoomsArr.filter(function(n){ return n != undefined }); //remove any undefined rooms
 
     }
 

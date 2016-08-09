@@ -1,12 +1,13 @@
 /* Master Styles */
 body {
   text-align: center;
-}
+  zoom: 60%;
 
+}
 h4 {
       font-weight: 100;
 }
-
+.chart {display: block; width: 100%;} 
 /* everywhere else */
 /** {
   font-family: Arial, Helvetica, sans-serif;
@@ -15,35 +16,67 @@ img{
   border-radius: 50%;
 }
 
-/*some hovering stuff- to chnage to something better*/
- /*img:hover {
-  background-color: #00FF00;
-  border-radius: 50%;
-  opacity:0.4 !important;
-  filter:alpha(opacity=70) !important;
-  box-shadow: 0 0 0px #000000 !important;
-}*/
 
+
+/*
+    press/click feedback FOR THE MOBILE/TOUCH
+*/
+
+#answer0:hover
+{
+ background-color: white; /*a hack to return it back to its normal color/background - white */
+ border-radius: 50%;
+}
+
+#answer0:hover:active
+{
+  background-color: #48fb47;
+}
+
+
+
+#answer1:hover
+{
+ background-color: white; /*a hack to return it back to its normal color/background - white */
+ border-radius: 50%;
+}
+
+#answer1:hover:active
+{
+  background-color: #ffbf00;
+}
+
+
+#answer2:hover
+{
+ background-color: white; /*a hack to return it back to its normal color/background - white */
+ border-radius: 50%;
+}
+
+#answer2:hover:active
+{
+  background-color: #ff0101;
+}
+
+
+
+
+/*
+ ////*  press/click feedback FOR THE WEB ONLY //
 #answer1:hover {
  background-color: #FF8300;
  border-radius: 50%;
- /*opacity:0.4 !important;
- filter:alpha(opacity=70) !important;
- box-shadow: 0 0 0px #000000 !important;*/
+
 }
 
 #answer0:hover {
  background-color: #48fb47;
  border-radius: 50%;
- /*opacity:0.4 !important;
- filter:alpha(opacity=70) !important;
- box-shadow: 0 0 0px #000000 !important;*/
+
 }
 
 #answer2:hover {
  background-color: #ff0101;
  border-radius: 50%;
- /*opacity:0.4 !important;
- filter:alpha(opacity=70) !important;
- box-shadow: 0 0 0px #000000 !important;*/
-}
+
+}*/

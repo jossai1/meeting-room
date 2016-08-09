@@ -1,23 +1,32 @@
-<p>hi</p>
-
 <div class="row">
-   <form class="col s12">
-     <div class="row">
-       <div class="input-field col s6">
-         <input class= "field" type="text"  placeholder="xx:xx"  [(ngModel)]= "startTime" class="validate">
-         <label for="field">Start Time</label>
-       </div>
-       <div class="input-field col s6">
-         <input class= "field" type="text"  placeholder="End Time"  [(ngModel)]= "endTime" class="validate">
-         <label for="last_name">Last Name</label>
-       </div>
-     </div>
-     <div class="input-field col s6">
-       <div class="input-field col s12">
-         <input class= "field" type="text"  placeholder="Meeting Room"  [(ngModel)]= "mtgRoom" type="text" class="validate">
-         <label for="disabled">Meeting Room</label>
-       </div>
-     </div>
 
+   <form class="col s12 test">
+
+
+     <input class= "field" type="text"  placeholder="Date"  [(ngModel)]= "date" type="text" class="validate">
+      <input class= "field" type="text"  placeholder="Start Time"  [(ngModel)]= "startTime" class="validate">
+      <input class= "field" type="text"  placeholder="End Time"  [(ngModel)]= "endTime" class="validate">
+      <input class= "field" type="text"  placeholder="Meeting Room"  [(ngModel)]= "mtgRoom" type="text" class="validate">
+
+     <br>
+      <button class="btn waves-effect waves-light" type="submit"  (click) = "submit()">Submit
+        <i class="material-icons right">send</i>
+      </button>
+
+     <!-- <input class="subBtn" type="submit" value="Submit" (click) = "submit()"> -->
    </form>
+
+<div class ="MeetingRes" *ngIf="isClicked">
+   <p> Date: {{date}}</p>
+   <p> Time: {{startTime}} - {{endTime}} </p>
+   <p> Room: {{mtgRoom}}</p>
+   <p> Results</p>
+   <p> red: {{red}}</p>
+   <p> green : {{green}}</p>
+   <p> amber : {{amber}}</p>
  </div>
+
+ </div>
+
+
+<line-chart-demo> </line-chart-demo>
