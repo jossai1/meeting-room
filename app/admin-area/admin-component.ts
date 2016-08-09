@@ -3,6 +3,8 @@ import { AnswerService } from '../services/answer.service';
 import { QuestionService } from '../services/question.service';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
+import { AdvancedQueryComponent } from './advanced-query/advanced-query.component';
+
 import 'rxjs/Rx';
 
 
@@ -10,7 +12,8 @@ import 'rxjs/Rx';
     selector: 'admin-area',
     templateUrl: 'app/admin-area/admin-component.html',
     styleUrls: ['app/admin-area/admin-component.css'],
-    providers: [ AnswerService, QuestionService ]
+    providers: [ AnswerService, QuestionService ],
+    directives: [AdvancedQueryComponent]
 })
 
 export class AdminComponent implements OnInit
@@ -22,6 +25,7 @@ export class AdminComponent implements OnInit
     answers: Answer[] =[];
     results: Answer[] =[];
     uniqDatesArr:string[] = [];
+    uniqRoomsArr:string[] = [];
     answersTime: Answer[] =[];
     uniqTimes: string []= [];
     selectedDate:string;
@@ -29,6 +33,7 @@ export class AdminComponent implements OnInit
     green:number=0;
     amber:number=0;
     isClicked:boolean = false;
+    loadAS:boolean = false;
     question: Question = new Question(); //question that was asked //  question: Question;
 
 
@@ -38,12 +43,13 @@ export class AdminComponent implements OnInit
 
     ngOnInit()
     {
+      setTimeout(() => {
+        this.getAnswers();
         setTimeout(() => {
-          this.getAnswers();
-          setTimeout(() => {
-            this.getDates();
-          }, 50);
-        }, 90);
+          this.getDates();
+        }, 500); //changed to 1000 :) lol
+      }, 1000);
+
 
     }
 
@@ -100,6 +106,19 @@ export class AdminComponent implements OnInit
 
         else{}
       }
+
+      //for me to see rooms
+    for(var i =0 ; i < this.results.length;i++)
+      {
+          //if(results[i].mtgRoom != undefined )
+          console.log(this.results[i].mtgRoom);
+          this.uniqRoomsArr[i] = this.results[i].mtgRoom;
+      }
+
+//for displaying rooms
+      this.uniqRoomsArr =  Array.from(new Set(this.uniqRoomsArr));//remove dupliacte rooms
+      this.uniqRoomsArr = this.uniqRoomsArr.filter(function(n){ return n != undefined }); //remove any undefined rooms
+
 
     }
 

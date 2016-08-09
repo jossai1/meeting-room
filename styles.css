@@ -24,7 +24,7 @@ img{
 
 #answer0:hover
 {
- background-color: white; /*a hack to return it back to its normal color/background - white */
+ //background-color: white; /*a hack to return it back to its normal color/background - white */
  border-radius: 50%;
 }
 
@@ -37,7 +37,7 @@ img{
 
 #answer1:hover
 {
- background-color: white; /*a hack to return it back to its normal color/background - white */
+ //background-color: white; /*a hack to return it back to its normal color/background - white */
  border-radius: 50%;
 }
 
@@ -49,7 +49,7 @@ img{
 
 #answer2:hover
 {
- background-color: white; /*a hack to return it back to its normal color/background - white */
+ //background-color: white; /*a hack to return it back to its normal color/background - white */
  border-radius: 50%;
 }
 
