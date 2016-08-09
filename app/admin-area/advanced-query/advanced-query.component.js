@@ -63,7 +63,7 @@ var AdvancedQueryComponent = (function () {
             templateUrl: 'app/admin-area/advanced-query/advanced-query.component.html',
             styleUrls: ['app/admin-area/advanced-query/advanced-query.component.css'],
             providers: [answer_service_1.AnswerService, question_service_1.QuestionService],
-            directives: [chart_component_1.LineChartDemoComponent]
+            directives: [chart_component_1.BarChartDemoComponent]
         }), 
         __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService])
     ], AdvancedQueryComponent);

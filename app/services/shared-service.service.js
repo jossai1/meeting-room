@@ -11,14 +11,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var SharedService = (function () {
     function SharedService() {
-        //set to blank 
+        //set to blank
         this.room = '';
+        this.red = 0;
+        this.green = 0;
+        this.amber = 0;
     }
     SharedService.prototype.set = function (roomName) {
         this.room = roomName;
     };
+    SharedService.prototype.setRed = function (red) {
+        this.red = red;
+    };
+    SharedService.prototype.setGreen = function (green) {
+        console.log('you gave me these greens: ' + this.green);
+        this.green = green;
+        console.log(this.green);
+    };
+    SharedService.prototype.setAmber = function (amber) {
+        this.amber = amber;
+    };
     SharedService.prototype.getRoomName = function () {
         return this.room;
+    };
+    SharedService.prototype.getGreen = function () {
+        console.log(this.green);
+        return this.green;
+    };
+    SharedService.prototype.getRed = function () {
+        console.log(this.red);
+        return this.red;
+    };
+    SharedService.prototype.getAmber = function () {
+        console.log(this.amber);
+        return this.amber;
     };
     SharedService = __decorate([
         core_1.Injectable(), 

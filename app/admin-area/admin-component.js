@@ -11,13 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var answer_service_1 = require('../services/answer.service');
 var question_service_1 = require('../services/question.service');
+var shared_service_service_1 = require('../services/shared-service.service');
 var question_1 = require('../models/question');
 var advanced_query_component_1 = require('./advanced-query/advanced-query.component');
 require('rxjs/Rx');
 var AdminComponent = (function () {
-    function AdminComponent(answerService, questionService) {
+    function AdminComponent(answerService, questionService, sharedService) {
         this.answerService = answerService;
         this.questionService = questionService;
+        this.sharedService = sharedService;
         this.myTitle = 'Survey Results';
         this.pickDate = 'Pick a date ';
         this.pickTime = '';
@@ -91,6 +93,9 @@ var AdminComponent = (function () {
             console.log(this.results[i].mtgRoom);
             this.uniqRoomsArr[i] = this.results[i].mtgRoom;
         }
+        this.sharedService.setGreen(this.green);
+        this.sharedService.setAmber(this.amber);
+        this.sharedService.setRed(this.red);
         //for displaying rooms
         this.uniqRoomsArr = Array.from(new Set(this.uniqRoomsArr)); //remove dupliacte rooms
         this.uniqRoomsArr = this.uniqRoomsArr.filter(function (n) { return n != undefined; }); //remove any undefined rooms
@@ -190,7 +195,7 @@ var AdminComponent = (function () {
             providers: [answer_service_1.AnswerService, question_service_1.QuestionService],
             directives: [advanced_query_component_1.AdvancedQueryComponent]
         }), 
-        __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService])
+        __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService, shared_service_service_1.SharedService])
     ], AdminComponent);
     return AdminComponent;
 }());

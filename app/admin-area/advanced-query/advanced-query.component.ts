@@ -3,7 +3,7 @@ import { AnswerService } from '../../services/answer.service';
 import { QuestionService } from '../../services/question.service';
 import { Answer } from '../../models/answer';
 import { Question } from '../../models/question';
-import { LineChartDemoComponent } from './chart.component';
+import { BarChartDemoComponent } from './chart.component';
 import 'rxjs/Rx';
 
 @Component ({
@@ -11,7 +11,7 @@ import 'rxjs/Rx';
     templateUrl: 'app/admin-area/advanced-query/advanced-query.component.html',
     styleUrls: ['app/admin-area/advanced-query/advanced-query.component.css'],
     providers: [ AnswerService, QuestionService ],
-    directives: [ LineChartDemoComponent ]
+    directives: [ BarChartDemoComponent ]
 
 })
 

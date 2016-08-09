@@ -1,6 +1,7 @@
 import { Component, Input, OnInit} from '@angular/core';
 import { AnswerService } from '../services/answer.service';
 import { QuestionService } from '../services/question.service';
+import { SharedService } from '../services/shared-service.service';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { AdvancedQueryComponent } from './advanced-query/advanced-query.component';
@@ -37,7 +38,7 @@ export class AdminComponent implements OnInit
     question: Question = new Question(); //question that was asked //  question: Question;
 
 
-    constructor(private answerService: AnswerService,private questionService: QuestionService)
+    constructor(private answerService: AnswerService,private questionService: QuestionService, private sharedService: SharedService )
     {  this.answers = [] ;this.question.questionText = "loading...";}
 
 
@@ -98,12 +99,17 @@ export class AdminComponent implements OnInit
 
         }
         else if ( this.results[i].response == 'amber')
-        { this.amber++;}
+        { this.amber++;
+        }
 
         else if ( this.results[i].response == 'red')
-        {this.red++;}
+        {this.red++;
+      }
 
         else{}
+
+
+
       }
 
 //for me to see rooms
@@ -113,6 +119,10 @@ export class AdminComponent implements OnInit
           console.log(this.results[i].mtgRoom);
           this.uniqRoomsArr[i] = this.results[i].mtgRoom;
       }
+      this.sharedService.setGreen(this.green);
+      this.sharedService.setAmber(this.amber);
+      this.sharedService.setRed(this.red);
+
 
 //for displaying rooms
       this.uniqRoomsArr =  Array.from(new Set(this.uniqRoomsArr));//remove dupliacte rooms
