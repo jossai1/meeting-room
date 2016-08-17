@@ -17,7 +17,11 @@ h4 {
 img{
   border-radius: 50%;
 }
-
+section-title {
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 600;
+    
+}
 
 
 /*
@@ -25,7 +29,10 @@ img{
 */
 
 #answer0:hover
-{
+{section-title {
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 600;
+}
  background-color: white; /*a hack to return it back to its normal color/background - white */
  border-radius: 50%;
 }
