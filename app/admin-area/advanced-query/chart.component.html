@@ -1,9 +1,11 @@
+<h4 class="section-title">Meeting Results</h4>
 <base-chart class="chart"
            [datasets]="barChartData"
            [labels]="barChartLabels"
            [options]="barChartOptions"
+           [colors] ="barChartColors"
            [legend]="barChartLegend"
            [chartType]="barChartType"
            (chartHover)="chartHovered($event)"
            (chartClick)="chartClicked($event)"></base-chart>
-           <button (click)="refresh()">CLICK</button>
+           <button (click)="refresh()">UPDATE</button>

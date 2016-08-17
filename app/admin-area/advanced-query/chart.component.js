@@ -24,24 +24,28 @@ var BarChartDemoComponent = (function () {
             scaleShowVerticalLines: false,
             responsive: true
         };
-        this.barChartLabels = ['MtgName', '2007', '2008', '2009', '2010', '2011', '2012'];
+        this.barChartLabels = ['test', 'Red', 'Green', 'Amber'];
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartData = [
-            { data: [this.red], label: 'Series A' },
-            { data: [this.green], label: 'Series B' },
-            { data: [this.amber], label: 'Series C' }
+            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Series A' }
         ];
+        this.barChartColors = [{ backgroundColor: ["#e74c3c", "#f44336", "#4caf50", "#ffc107"] }];
     }
     BarChartDemoComponent.prototype.refresh = function () {
         // this.red= this.sharedService.getRed();
         // this.green = this.sharedService.getGreen();
         // this.amber = this.sharedService.getAmber();
-        this.barChartData = [
-            { data: [this.sharedService.getRed()], label: 'Series A' },
-            { data: [this.sharedService.getGreen()], label: 'Series B' },
-            { data: [this.sharedService.getAmber()], label: 'Series C' }
+        var _barChartData = [
+            { data: [0, this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Series A' }
         ];
+        console.log(_barChartData);
+        this.barChartData = _barChartData;
+        //returns [2,3,3] data[] arr
+        // this.barChartData[0].data[0] = this.sharedService.getRed();
+        // this.barChartData[0].data[1] = this.sharedService.getGreen();
+        // this.barChartData[0].data[2] = this.sharedService.getAmber();
+        //console.log("jijii"+this.barChartData[0].data[0]);
     };
     // events
     BarChartDemoComponent.prototype.chartClicked = function (e) {

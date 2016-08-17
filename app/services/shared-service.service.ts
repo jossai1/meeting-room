@@ -7,7 +7,7 @@ export class SharedService
 
   //set to blank
   room: string = '';
-  red:number =  0;
+  red:number = 0;
   green:number= 0;
   amber:number= 0;
 
