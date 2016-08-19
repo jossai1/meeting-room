@@ -14,6 +14,7 @@ var question_service_1 = require('../services/question.service');
 var shared_service_service_1 = require('../services/shared-service.service');
 var question_1 = require('../models/question');
 var advanced_query_component_1 = require('./advanced-query/advanced-query.component');
+var chart_component_1 = require('./advanced-query/chart.component');
 require('rxjs/Rx');
 var AdminComponent = (function () {
     function AdminComponent(answerService, questionService, sharedService) {
@@ -193,7 +194,7 @@ var AdminComponent = (function () {
             templateUrl: 'app/admin-area/admin-component.html',
             styleUrls: ['app/admin-area/admin-component.css'],
             providers: [answer_service_1.AnswerService, question_service_1.QuestionService],
-            directives: [advanced_query_component_1.AdvancedQueryComponent]
+            directives: [advanced_query_component_1.AdvancedQueryComponent, chart_component_1.BarChartDemoComponent]
         }), 
         __metadata('design:paramtypes', [answer_service_1.AnswerService, question_service_1.QuestionService, shared_service_service_1.SharedService])
     ], AdminComponent);

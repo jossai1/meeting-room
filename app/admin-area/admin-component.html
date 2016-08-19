@@ -1,7 +1,8 @@
-<h1 class=" blue-grey-text" >{{ myTitle }}</h1>
-<h5 class=" blue-grey-text" >{{ pickDate }}</h5>
+<h1 class=" blue-grey-text">{{ myTitle }}</h1>
+<h5 class=" blue-grey-text">{{ pickDate }}</h5>
 
-<br><br>
+<br>
+<br>
 
 <!-- <small class=" blue-grey-text" > select a date:   </small> -->
 
@@ -11,78 +12,101 @@
 <!-- <br><br>
 
 <small class=" blue-grey-text"> double click buttons to see updated changes:   </small> -->
-  <!-- old style button without materialze <button *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </button> -->
+<!-- old style button without materialze <button *ngFor="let day of uniqDatesArr; let j = index" value="day" (click)="getTimes(j)"> {{uniqDatesArr[j]}} </button> -->
 
 <a class="waves-effect waves-light btn dates" *ngFor="let day of uniqDatesArr; let dateIndex = index" value="day" (click)="getTimes(dateIndex)"> {{uniqDatesArr[dateIndex]}} </a>
 
 
-<hr class="styled-hr" style="width:100%;">
+<div class="divider"></div>
 
 
-<h5 class=" blue-grey-text" >{{ pickTime }}</h5>
+<h5 class=" blue-grey-text">{{ pickTime }}</h5>
 
 <!-- <button *ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </button> -->
-<a class="waves-effect waves-light btn times"*ngFor="let time of uniqTimes; let i = index" value="time" (click) ="finalQuery(i)" > {{uniqTimes[i]}} </a>
+<a class="waves-effect waves-light btn times" *ngFor="let time of uniqTimes; let i = index" value="time" (click)="finalQuery(i)"> {{uniqTimes[i]}} </a>
 
 
-<br><br>
+<br>
+<br>
 
 <!-- <button (click)="tally()" > Tally   </button> -->
 <!-- no need for tally button due to timers <a class="waves-effect waves-light btn"  (click)="tallySurveyAnswers()" > Tally   </a> -->
+<div class="divider"></div>
 
-<div class ="con" *ngIf="isClicked">
-  <div class="row">
 
-    <div class="col s4">
+<h5 class=" blue-grey-text"> Results*  <span> <i rel="tooltip" title="Results are estimated" class=" large material-icons disclaimer">error_outline</i> </span>
+</h5>
+<!-- <span> <i rel="tooltip" title="results are estimated" class=" large material-icons disclaimer">warning</i> </span> -->
 
-      <i style="color: #64b5f6;"class="large material-icons">room</i>
-      <ul>
-      <li *ngFor= "let room of uniqRoomsArr"> {{room}}</li>
-      </ul>
-      <!-- Promo Content 1 goes here -->
-    </div>
-    <div class="col s4">
-      <!-- Promo Content 2 goes here -->
-    </div>
-    <div class="col s4">
-      <!-- Promo Content 3 goes here -->
+<div class="results" *ngIf="isClicked">
+
+    <!--for question and room todo- rename   -->
+    <div class="con">
+
+        <div class="row">
+
+            <div class="col s4">
+
+                <div style="text-align:center">
+                    <i style="color: #64b5f6;" class="large material-icons">room</i>
+                    <ul>
+                        <li *ngFor="let room of uniqRoomsArr"> {{room}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="col s12 m5">
+                <div class="card-panel grey">
+                    <p> Question: {{question.questionText}}</p>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-  </div>
 
-  <div class="col">
-    <div class="col s12 m5">
-      <div class="card-panel grey">
-      <p> Question: {{question.questionText}}</p>
-      </div>
+    <div class="row">
+
+        <div class="responses-con col s6 ">
+            <div class="col">
+                <div class="">
+                    <div class="card-panel red">
+                        <p> Negative: {{red}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="">
+                    <div class="card-panel amber">
+                        <p> Neutral : {{amber}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="">
+                    <div class="card-panel green">
+                        <p> Positive : {{green}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col s6 chart-view">
+            <bar-chart-demo> </bar-chart-demo>
+        </div>
     </div>
-  </div>
-  <div class="col">
-    <div class="col s12 m5">
-      <div class="card-panel red">
-        <p> red: {{red}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="col s12 m5">
-      <div class="card-panel green">
-      <p> green : {{green}}</p>
-      </div>
-    </div>
-  </div>
-  <div class="col">
-    <div class="col s12 m5">
-      <div class="card-panel amber">
-        <p> amber : {{amber}}</p>
-      </div>
-    </div>
-  </div>
+
 </div>
 <br>
-<!--IF LINK IS CLIECKED - LOAD ADVANCED SEARCH   -->
-<a (click)= "loadAS = true"> Advanced Query</a>
-<advanced-query *ngIf="loadAS">
-  </advanced-query>
 
-  <div class="divider"></div>
+
+<div class="divider"></div>
+
+<!--IF LINK IS CLICKED - LOAD ADVANCED SEARCH   -->
+<a (click)="loadAS = true"> Click for Advanced Query</a>
+<advanced-query *ngIf="loadAS"></advanced-query>
+
+<div class="divider"></div>

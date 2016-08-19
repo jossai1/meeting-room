@@ -28,7 +28,7 @@ var BarChartDemoComponent = (function () {
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartData = [
-            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Series A' }
+            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Responses' }
         ];
         this.barChartColors = [{ backgroundColor: ["#e74c3c", "#f44336", "#4caf50", "#ffc107"] }];
     }
@@ -37,7 +37,7 @@ var BarChartDemoComponent = (function () {
         // this.green = this.sharedService.getGreen();
         // this.amber = this.sharedService.getAmber();
         var _barChartData = [
-            { data: [0, this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Series A' }
+            { data: [0, this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Responses' }
         ];
         console.log(_barChartData);
         this.barChartData = _barChartData;

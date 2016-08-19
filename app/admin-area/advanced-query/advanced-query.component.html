@@ -1,34 +1,33 @@
 <div class="row">
 
-   <form class="col s6 test">
+    <div class="col s4">
+        <form class="">
+            <input class="field" type="text" placeholder="Date" [(ngModel)]="date" type="text" class="validate">
+            <input class="field" type="text" placeholder="Start Time" [(ngModel)]="startTime" class="validate">
+            <input class="field" type="text" placeholder="End Time" [(ngModel)]="endTime" class="validate">
+            <input class="field" type="text" placeholder="Meeting Room" [(ngModel)]="mtgRoom" type="text" class="validate">
+
+            <br>
+            <button class="btn waves-effect waves-light" type="submit" (click)="submit()">Submit
+                <i class="material-icons right">send</i>
+            </button>
+            <!-- <input class="subBtn" type="submit" value="Submit" (click) = "submit()"> -->
+        </form>
+    </div>
+
+    <div class="col s4" *ngIf="isClicked">
+        <p> Date: {{date}}</p>
+        <p> Time: {{startTime}} - {{endTime}} </p>
+        <p> Room: {{mtgRoom}}</p>
+        <p> Results</p>
+        <p> red: {{red}}</p>
+        <p> green : {{green}}</p>
+        <p> amber : {{amber}}</p>
+    </div>
 
 
-     <input class= "field" type="text"  placeholder="Date"  [(ngModel)]= "date" type="text" class="validate">
-      <input class= "field" type="text"  placeholder="Start Time"  [(ngModel)]= "startTime" class="validate">
-      <input class= "field" type="text"  placeholder="End Time"  [(ngModel)]= "endTime" class="validate">
-      <input class= "field" type="text"  placeholder="Meeting Room"  [(ngModel)]= "mtgRoom" type="text" class="validate">
+    <div class="col s4">
+        <bar-chart-demo> </bar-chart-demo>
+    </div>
 
-     <br>
-      <button class="btn waves-effect waves-light" type="submit"  (click) = "submit()">Submit
-        <i class="material-icons right">send</i>
-      </button>
-
-     <!-- <input class="subBtn" type="submit" value="Submit" (click) = "submit()"> -->
-   </form>
-
-<div class ="MeetingRes" *ngIf="isClicked">
-   <p> Date: {{date}}</p>
-   <p> Time: {{startTime}} - {{endTime}} </p>
-   <p> Room: {{mtgRoom}}</p>
-   <p> Results</p>
-   <p> red: {{red}}</p>
-   <p> green : {{green}}</p>
-   <p> amber : {{amber}}</p>
- </div>
-
- <div class="col s6">
-
-   <bar-chart-demo> </bar-chart-demo>
-
- </div>
- </div>
+</div>

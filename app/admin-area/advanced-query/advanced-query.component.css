@@ -3,7 +3,9 @@ form.col.s12.test{
   margin-left: 32%;
 }
 
-
+.MeetingRes{
+display: inline-flex;
+}
 my-barchart{
-  
+
 }

@@ -5,6 +5,8 @@ import { SharedService } from '../services/shared-service.service';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { AdvancedQueryComponent } from './advanced-query/advanced-query.component';
+import { BarChartDemoComponent } from './advanced-query/chart.component';
+
 
 import 'rxjs/Rx';
 
@@ -14,7 +16,7 @@ import 'rxjs/Rx';
     templateUrl: 'app/admin-area/admin-component.html',
     styleUrls: ['app/admin-area/admin-component.css'],
     providers: [ AnswerService, QuestionService ],
-    directives: [AdvancedQueryComponent]
+    directives: [AdvancedQueryComponent, BarChartDemoComponent ]
 })
 
 export class AdminComponent implements OnInit
