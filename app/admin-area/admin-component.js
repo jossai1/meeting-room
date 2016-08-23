@@ -34,6 +34,7 @@ var AdminComponent = (function () {
         this.green = 0;
         this.amber = 0;
         this.isClicked = false;
+        this.isCollapsedContent = false;
         this.loadAS = false;
         this.question = new question_1.Question(); //question that was asked //  question: Question;
         this.answers = [];

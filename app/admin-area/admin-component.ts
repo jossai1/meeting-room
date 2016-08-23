@@ -36,6 +36,7 @@ export class AdminComponent implements OnInit
     green:number=0;
     amber:number=0;
     isClicked:boolean = false;
+    isCollapsedContent:boolean = false;
     loadAS:boolean = false;
     question: Question = new Question(); //question that was asked //  question: Question;
 

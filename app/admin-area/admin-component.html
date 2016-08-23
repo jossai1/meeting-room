@@ -106,7 +106,10 @@
 <div class="divider"></div>
 
 <!--IF LINK IS CLICKED - LOAD ADVANCED SEARCH   -->
-<a (click)="loadAS = true"> Click here for Advanced Query</a>
-<advanced-query *ngIf="loadAS"></advanced-query>
+<span>
+<a style="font-size: 24px;font-family: roboto;font-weight: 300" (click)="isCollapsedContent = !isCollapsedContent"> Click here for advanced query</a>
+<i style="color: #26a69a;font-size:38px" class="large material-icons">zoom_in</i>
+</span>
+<advanced-query *ngIf="isCollapsedContent"></advanced-query>
 
 <div class="divider"></div>
