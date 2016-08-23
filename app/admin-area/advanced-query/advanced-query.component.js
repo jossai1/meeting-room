@@ -22,9 +22,12 @@ var AdvancedQueryComponent = (function () {
         this.green = 0;
         this.amber = 0;
         this.isClicked = false;
+        this.isSubmitted = false;
+        //might not need as issubmitted is the polar opposite
+        //this will be set to true once the query has been submitted which means -> show results
+        this.showResults = false;
     }
-    AdvancedQueryComponent.prototype.ngOnInit = function () {
-    };
+    AdvancedQueryComponent.prototype.ngOnInit = function () { };
     //displays/updates the g,r,a counts
     AdvancedQueryComponent.prototype.tallySurveyAnswers = function () {
         //initialise to 0. ..so value doesnt change each time i click
@@ -53,9 +56,12 @@ var AdvancedQueryComponent = (function () {
                 .catch(function (error) { return _this.error = error; });
             setTimeout(function () {
                 _this.tallySurveyAnswers();
+                //show result
                 _this.isClicked = true;
             }, 50);
         }, 100);
+        //set to true once submitted
+        this.isSubmitted = true;
     };
     AdvancedQueryComponent = __decorate([
         core_1.Component({

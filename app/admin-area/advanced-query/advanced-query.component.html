@@ -1,21 +1,50 @@
-<div class="row">
+<div>
+<div class="con">
 
-    <div class="col s4">
-        <form class="">
+    <div class="col s6">
+        <!-- used to be a <form> tag but changed as it was generatign a question mark in the url  -->
+        <div *ngIf="!isSubmitted" class="">
             <input class="field" type="text" placeholder="Date" [(ngModel)]="date" type="text" class="validate">
             <input class="field" type="text" placeholder="Start Time" [(ngModel)]="startTime" class="validate">
             <input class="field" type="text" placeholder="End Time" [(ngModel)]="endTime" class="validate">
             <input class="field" type="text" placeholder="Meeting Room" [(ngModel)]="mtgRoom" type="text" class="validate">
 
             <br>
-            <button class="btn waves-effect waves-light" type="submit" (click)="submit()">Submit
+            <button class="btn waves-effect waves-light" type="button" (click)="submit()"> Submit
                 <i class="material-icons right">send</i>
             </button>
-            <!-- <input class="subBtn" type="submit" value="Submit" (click) = "submit()"> -->
-        </form>
+        </div>
     </div>
 
-    <div class="col s4" *ngIf="isClicked">
+    <div class="col s6 query-results" *ngIf="isSubmitted">
+
+
+
+
+        <div class="card-panel ">
+            <span style="font-size: 24px;font-family: roboto;font-weight: 300">
+                 <i style="color: #26a69a;font-size:60px" class="large material-icons">receipt</i>
+                </span>
+
+        <br>
+            <span style="font-size: 24px;font-family: roboto;font-weight: 200">
+                Date: {{date}} |  Time: {{startTime}} - {{endTime}} |  Room: {{mtgRoom}}
+            </span>
+
+
+
+            <p class="redCol">Negative: {{red}}</p>
+            <p class="amberCol">Neutral: {{amber}}</p>
+            <p class="greenCol">Positive: {{amber}}</p>
+
+        </div>
+
+        <button class="btn waves-effect waves-light" type="button" (click)="isSubmitted = !isSubmitted"> Again
+            <i class="material-icons right">send</i>
+        </button>
+    </div>
+
+    <!-- <div class="col s4 query-results" *ngIf="isClicked">
         <p> Date: {{date}}</p>
         <p> Time: {{startTime}} - {{endTime}} </p>
         <p> Room: {{mtgRoom}}</p>
@@ -23,11 +52,18 @@
         <p> red: {{red}}</p>
         <p> green : {{green}}</p>
         <p> amber : {{amber}}</p>
+    </div> -->
+
+    <!-- <div id="mainFrameOne">
+        <p>mainFrameOne</p>
     </div>
-
-
-    <div class="col s4">
+    <div id="mainFrameTwo" style="display:none;">
+        <p>mainFrameTwo</p>
+    </div>
+    <button onclick="myFunction()">Click me</button> -->
+    <!-- <div class="col s4">
         <bar-chart-demo> </bar-chart-demo>
-    </div>
+    </div> -->
 
+</div>
 </div>

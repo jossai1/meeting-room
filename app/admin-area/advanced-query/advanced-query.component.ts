@@ -28,16 +28,20 @@ export class AdvancedQueryComponent implements OnInit
   amber:number=0;
   isClicked:boolean = false;
 
+  isSubmitted:boolean = false;
+
+  //might not need as issubmitted is the polar opposite
+  //this will be set to true once the query has been submitted which means -> show results
+  showResults:boolean = false;
+
 
   constructor(private answerService: AnswerService,private questionService: QuestionService)
   {  }
 
 
   ngOnInit()
-  {
+  { }
 
-
-  }
   //displays/updates the g,r,a counts
   tallySurveyAnswers()
   {
@@ -71,11 +75,12 @@ export class AdvancedQueryComponent implements OnInit
             .catch(error => this.error = error);
          setTimeout(() => {
             this.tallySurveyAnswers();
+            //show result
             this.isClicked = true;
          }, 50);
        }, 100);
+       //set to true once submitted
+       this.isSubmitted = true;
   }
-
-
 
 }

@@ -1,11 +1,33 @@
-form.col.s12.test{
-  width:40%;
-  margin-left: 32%;
+form.col.s12.test {
+    width: 40%;
+    margin-left: 32%;
 }
-
-.MeetingRes{
-display: inline-flex;
+.MeetingRes {
+    display: inline-flex;
 }
-my-barchart{
-
+my-barchart {}
+P {
+    font-size: 25px;
+    font-weight: 200;
+}
+.con {
+    /*display: inline-flex;*/
+    text-align: center;
+    padding-left: 30%;
+    padding-right: 30%;
+}
+.redCol {
+    font-weight: 300;
+    background-color: white;
+    color: red;
+}
+.amberCol {
+    font-weight: 300;
+    background-color: white;
+    color: rgb(255, 193, 7);
+}
+.greenCol {
+    font-weight: 300;
+    background-color: white;
+    color: green;
 }
