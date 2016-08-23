@@ -25,15 +25,15 @@ export class BarChartDemoComponent {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  public barChartLabels:string[] = ['test','Red', 'Green', 'Amber'];
+  public barChartLabels:string[] = ['Red', 'Green', 'Amber',''];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
 
   public barChartData:any[] = [
-    {data: [this.sharedService.getRed(),this.sharedService.getGreen(),this.sharedService.getAmber()], label:'Responses'}
+    {data: [this.sharedService.getRed(),this.sharedService.getGreen(),this.sharedService.getAmber(),0], label:'Responses'}
   ];
 
-  private barChartColors: any[] = [{ backgroundColor: ["#e74c3c", "#f44336", "#4caf50", "#ffc107"] }];
+  private barChartColors: any[] = [{ backgroundColor: [ "#f44336", "#4caf50", "#ffc107","#e74c3c"] }];
 
 refresh(){
   // this.red= this.sharedService.getRed();
@@ -42,7 +42,7 @@ refresh(){
 
 
   let _barChartData =[
-    {data: [0,this.sharedService.getRed(),this.sharedService.getGreen(),this.sharedService.getAmber()], label:'Responses'}
+    {data: [this.sharedService.getRed(),this.sharedService.getGreen(),this.sharedService.getAmber(),0], label:'Responses'}
 
   ];
   console.log(_barChartData);

@@ -20,11 +20,12 @@ h5 {
     font-weight: 200;
 }
 .card-panel {
-    margin-right: 30px;
+    /*margin-right: 30px;*/
 }
 .dates, .times {
     margin: 1%;
 }
+
 P {
     font-size: 25px;
     font-weight: 200;

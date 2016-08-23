@@ -45,10 +45,10 @@
 
         <div class="row">
 
-            <div class="col s4">
+            <div class="col s4 ">
 
                 <div style="text-align:center">
-                    <i style="color: #64b5f6;" class="large material-icons">room</i>
+                    <i style="color: #26a69a;" class="large material-icons">room</i>
                     <ul>
                         <li *ngFor="let room of uniqRoomsArr"> {{room}}</li>
                     </ul>
@@ -106,7 +106,7 @@
 <div class="divider"></div>
 
 <!--IF LINK IS CLICKED - LOAD ADVANCED SEARCH   -->
-<a (click)="loadAS = true"> Click for Advanced Query</a>
+<a (click)="loadAS = true"> Click here for Advanced Query</a>
 <advanced-query *ngIf="loadAS"></advanced-query>
 
 <div class="divider"></div>

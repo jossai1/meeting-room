@@ -24,20 +24,20 @@ var BarChartDemoComponent = (function () {
             scaleShowVerticalLines: false,
             responsive: true
         };
-        this.barChartLabels = ['test', 'Red', 'Green', 'Amber'];
+        this.barChartLabels = ['Red', 'Green', 'Amber', ''];
         this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartData = [
-            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Responses' }
+            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber(), 0], label: 'Responses' }
         ];
-        this.barChartColors = [{ backgroundColor: ["#e74c3c", "#f44336", "#4caf50", "#ffc107"] }];
+        this.barChartColors = [{ backgroundColor: ["#f44336", "#4caf50", "#ffc107", "#e74c3c"] }];
     }
     BarChartDemoComponent.prototype.refresh = function () {
         // this.red= this.sharedService.getRed();
         // this.green = this.sharedService.getGreen();
         // this.amber = this.sharedService.getAmber();
         var _barChartData = [
-            { data: [0, this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber()], label: 'Responses' }
+            { data: [this.sharedService.getRed(), this.sharedService.getGreen(), this.sharedService.getAmber(), 0], label: 'Responses' }
         ];
         console.log(_barChartData);
         this.barChartData = _barChartData;
